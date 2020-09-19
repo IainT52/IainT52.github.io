@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>		
+	<!-- Meta Tags -->
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<title id="pagetitle">Audio Visualizer</title>
+	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="audio-visualizer.css"/>
+	<script src="https://kit.fontawesome.com/1951006a4b.js" SameSite="None" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body onload="initCanvas_Audio()">
+	<!-- Canvas -->
+	<div class="canvas-wrap">
+		<canvas id="visualizer_render">
+		</canvas>
+		<!-- Audio Controls -->
+		<div class="container">
+			<h2>&nbsp &nbsp&nbsp Input Soundcloud track here:</h2>
+			<form class="form-inline" >
+				<form>
+					<div class="form-group">
+						<label for="textbox"><a href="https://soundcloud.com/discover" target="_blank"><i class="fab fa-soundcloud soundcloud"></i></a></label>
+						<input 
+							id="input_URL"
+							type="textbox"
+							class="form-control textbox"
+							name="URL"
+							style="width: 350px;"
+							value="https://soundcloud.com/dominicfike/3-nights"
+							onclick="textboxAuto_Highlight()"
+						/>
+					</div>
+					<div class="form-group">
+						<button type="button" class="button" id="submitButton" onclick="handlePlay_Button()">
+							Submit
+						</button>
+						<button type="button" class="button" id="toggle" onclick="togglePlay()">
+							&#x23f5;
+						</button>
+					</div>
+				</form>
+				<form class="form-inline">
+					<input style="width: 550px;" onclick="audio.currentTime = $('#audioSlider').val * (audio.duration / 100);" type="range" id="audioSlider">
+					<div id="form-group">
+						<h1 id="audioTimer"></h1>
+					</div>
+				</form>
+			</form>
+		</div>
+	</div>
+	<!-- Logo for circle -->
+	<div class="logoFor_Canvas">
+		<img id="logo" width="100" height="100" src="/logo.png" alt="">
+	</div>
+	<!-- Track Info -->
+	<div class="trackInfo">
+		<img id="artwork" width="150" height="150">
+		<h1 id="artistname"></h1>
+		<h1 id="songname"></h1>
+	</div>
+	<!-- Bootstrap modal notification (Popup tutorial on page load for how to use audio reaction) -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Quick tutorial</h5>
+			  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+			  		</button>
+				</div>
+				<div class="modal-body">
+				  You can immediately press the play button to play the pre-selected 
+				  Soundcloud track or click the Soundcloud button below to find your own track!<br>
+				  <strong>Format:</strong> https://soundcloud.com/user/track
+				</div>
+				<div class="modal-footer">
+			  		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			  		<button type="button" class="btn btn-primary"><a href="https://soundcloud.com/discover" target="_blank"><i class="fab fa-soundcloud soundcloud"></i></a></button>
+				</div>
+		  	</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="audio-visualizer.js"></script>
+</body>
+
+</html>

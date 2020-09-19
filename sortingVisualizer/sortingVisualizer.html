@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Visualizer</title>
+    <link rel="stylesheet" href="sortingVisualizer.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="navButtons">
+        <a href="/homePage/index.html"><i class="material-icons">house</i></a>
+        <a href="#"><i class="material-icons">person</i></a>
+    </div>
+    <div class="navControl">
+        <!--  Logo  -->
+        <div class="logo">
+            <a href="/homePage/index.html"><img src="/logo.png" style="width:150px; height:150px;"></img></a>
+        </div>
+            <select id="inputState" class="button algoSelector">
+                <option selected>Sorting Algorithm</option>
+                <option onclick="bubbleSort()" >Bubble Sort</option>
+                <option onclick="insertionSort()">Insertion Sort</option>
+                <option onclick="selectionSort()">Selection Sort</option>
+            </select> 
+            <button type="button" class="button" id="randButton" onclick="randomize()">
+                Randomize
+            </button>
+            <button type="button" class="button" id="pauseButton" onclick="togglePlay()">
+                Pause
+            </button> 
+    </div>
+    <div class="barContainer"></div>
+
+    <div id="topoBG"></div>
+
+    <!-- Bootstrap modal notification (Popup tutorial on page load for how to use audio reaction) -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Quick tutorial</h5>
+			  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+			  		</button>
+				</div>
+				<div class="modal-body">
+                    <strong>Speed:</strong><br>
+                    Hover over the bars to conrtol the speed of the 
+                    algorithm and animation. Moving your mouse to the 
+                    right will decrease the speed while moving it to the left will increase the speed.<br>
+                    <strong>Randomize:</strong><br>
+                    The randomize button resets the size (width) of 
+                    the bars and shuffles their heights.<br>
+                    <strong>Pause:</strong><br>
+                    The Pause button will pause the animation. You can 
+                    press it again to resume the animation. <br>
+                    Note: You can pause and switch algorithms halfway 
+                    through a sort.
+				</div>
+		  	</div>
+		</div>
+    </div>
+    
+    <!-- VantaJS plugin https://www.vantajs.com/ -->
+    <script src="p5.min.js"></script>
+    <script src="vanta.topology.min.js"></script>
+    <script>
+        VANTA.TOPOLOGY({
+            el: "#topoBG",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xcf70ba,
+            backgroundColor: 0x1f1f24,
+        })
+    </script>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="sorting.js"></script>
+</body>
+</html>

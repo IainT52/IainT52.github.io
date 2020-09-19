@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Krona+One&family=Roboto+Mono&family=Share+Tech+Mono&family=Pacifico&family=Permanent+Marker&display=swap');
+:root {
+	--main-theme-color: #1df0de;
+	margin: 0;
+	padding: 0;
+	font-family: 'Share Tech Mono', monospace;
+}
+
+body{
+	overflow: hidden;
+}
+
+.canvas-wrap { position:relative; width:800px; height:600px }
+.canvas-wrap canvas { position:absolute; top:0; left:0; z-index:0 }
+.container { position:absolute; top:87vh; left:32vw; color: white;}
+.container h2 {font-size: 20px; font-family: 'Share Tech Mono', monospace;}
+
+.logoFor_Canvas {
+	visibility: hidden;
+}
+
+.button {
+	background-color: transparent;
+	border: 2px solid var(--main-theme-color);
+	border-radius: 4px;
+	color: var(--main-theme-color);
+	font-size: 21px;
+	font-family: 'Share Tech Mono', monospace;
+	margin-left: 3px;
+	margin-right: 3px;
+	cursor: pointer;
+}
+
+.textbox { 
+    background-color: transparent !important;
+	border: 2px solid var(--main-theme-color) !important;
+	color: darkgrey !important;
+    border-radius: 5px;
+    outline: none;
+    height:23px;
+    width: 400px;
+}
+
+.soundcloud {
+	font-size: 40px;
+	color: orange;
+	margin-right: 5px;
+}
+
+#audioTimer {
+	margin-left: 5px;
+	color: var(--main-theme-color);
+	font-size: 30px;
+	font-family: 'Share Tech Mono', monospace;
+	letter-spacing: -3px;
+}
+
+#artwork {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	opacity: 0;
+	border: 2px solid var(--main-theme-color);
+}
+
+#artistname {
+	color: white;
+	position: absolute;
+	top: 40px;
+	left: 170px;
+	font-size: 30px;
+	font-family: 'Share Tech Mono', monospace;
+}
+
+#songname {
+	color: white;
+	position: absolute;
+	top: 0px;
+	left: 170px;
+	font-size: 40px;
+	font-family: 'Share Tech Mono', monospace;
+}
+
+input[type=range]{
+    appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 600px;
+    height: 10px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: var(--main-theme-color);
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}

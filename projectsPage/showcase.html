@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+
+    <link rel="stylesheet" href="showcaseStyle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+  <body>
+    <!-- Logo-->
+    <div class="logo">
+      <a href="/homePage/index.html"><img src="/logo.png" style="width:150px; height:150px;"></img></a>
+    </div>
+    <!-- Background Globe -->
+    <div id="backgroundAnimation"></div>
+    <!-- Card Showcase -->
+    <div id="filter"></div>
+    <div id="filterShadow"></div>
+    <section class="card-list">
+      <!-- Head Card -->
+      <article class="headCard">
+        <header class="card-header">
+          <p>2019 - Present</p>
+          <h1><strong>Projects</strong></h1>
+        </header>
+          
+        </div>
+        <div>
+          <a href="/homePage/index.html"><i class="material-icons">house</i></a>
+          <a href="#"><i class="material-icons">person</i></a>
+          <a></a>
+        </div>
+      </article>
+  <!-- Article # 1-->
+      <article class="card">
+        <header class="card-header">
+          <p>August 2020</p>
+          <h2>Audio Visualizer</h2>
+        </header>
+
+          <div class="author-name">
+            <div class="author-name-prefix">Lorem</div>
+            Ipsum
+          </div>
+        </div>
+        <div class="tags">
+          <a>html</a>
+          <a>css</a>
+          <a>jQuery</a>
+          <a>JSON</a>
+        </div>
+      </article>
+<!-- Article # 2-->
+      <article class="card">
+        <header class="card-header">
+          <p>April 2020</p>
+          <h2>Dynamic Memory Allocator</h2>
+        </header>
+
+          <div class="author-name">
+            <div class="author-name-prefix">Lorem</div>
+            Ipsum
+          </div>
+        </div>
+        <div class="tags">
+          <a href="#">C</a>
+          <a href="#">Makefile</a>
+        </div>
+      </article>
+      <!-- Article # 3-->
+      <article class="card">
+        <header class="card-header">
+          <p>September 2020</p>
+          <h2>Sorting Visualizer</h2>
+        </header>
+
+          <div class="author-name">
+            <div class="author-name-prefix">Lorem</div>
+            Ipsum
+          </div>
+        </div>
+        <div class="tags">
+          <a href="#">html</a>
+          <a href="#">css</a>
+        </div>
+      </article>
+  <!-- Article # 4-->
+      <article class="card">
+        <header class="card-header">
+          <p>September 2020</p>
+          <h2>Personal Website</h2>
+        </header>
+
+          <div class="author-name">
+            <div class="author-name-prefix">Lorem</div>
+            Ipsum
+          </div>
+        </div>
+        <div class="tags">
+          <a href="#">html</a>
+          <a href="#">css</a>
+          <a href="#">JS</a>
+          <a href="#">Bootstrap</a>
+        </div>
+      </article>
+
+  <!-- Article # 5-->
+      <article class="card">
+        <header class="card-header">
+          <p>Future</p>
+          <h2>Under Development</h2>
+        </header>
+
+          <div class="author-name">
+            <div class="author-name-prefix">Lorem</div>
+            Ipsum
+          </div>
+        </div>
+        <div class="tags">
+          <a href="#">html</a>
+          <a href="#">css</a>
+        </div>
+      </article>
+  <!-- Article # 6-->
+      <article class="card">
+        <header class="card-header">
+          <p>Future</p>
+          <h2>Under Development</h2>
+        </header>
+
+          <div class="author-name">
+            <div class="author-name-prefix">Lorem</div>
+            Ipsum
+          </div>
+        </div>
+        <div class="tags">
+          <a href="#">html</a>
+          <a href="#">css</a>
+        </div>
+      </article>
+    </section>
+    <!-- VantaJS plugin https://www.vantajs.com/ -->
+    <script src="three.r119.min.js"></script>
+    <script src="vanta.globe.min.js"></script>
+    <script>
+      VANTA.GLOBE({
+        el: "#backgroundAnimation",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        backgroundColor: 0x1f1f24,
+        color: 0x1df0de,
+        color2: 0xcf70ba
+      })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="showcase.js"></script>
+  </body>
+</html>
