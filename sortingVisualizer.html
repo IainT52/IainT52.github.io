@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorting Visualizer</title>
-    <link rel="stylesheet" href="sortingVisualizer.css">
+    <link rel="stylesheet" href="CSS/sortingVisualizer.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 </head>
 <body>
     <div class="navButtons">
-        <a href="/homePage/index.html"><i class="lnr lnr-home"></i></a>
-        <a href="/homePage/index.html#aboutContainer"><i class="lnr lnr-user"></i></a>
-        <a href="/projectsPage/showcase.html"><i class="lnr lnr-briefcase"></i></a>
+        <a href="index.html"><i class="lnr lnr-home"></i></a>
+        <a href="index.html#aboutContainer"><i class="lnr lnr-user"></i></a>
+        <a href="showcase.html"><i class="lnr lnr-briefcase"></i></a>
     </div>
     <div class="navControl">
         <!--  Logo  -->
         <div class="logo">
-            <a href="/homePage/index.html"><img src="/logo.png" style="width:150px; height:150px;"></img></a>
+            <a href="index.html"><img src="MISC/logo.png" style="width:150px; height:150px;"></img></a>
         </div>
             <select id="inputState" class="button algoSelector">
                 <option selected>Sorting Algorithm</option>
@@ -65,8 +65,8 @@
     </div>
     
     <!-- VantaJS plugin https://www.vantajs.com/ -->
-    <script src="p5.min.js"></script>
-    <script src="vanta.topology.min.js"></script>
+    <script src="JS/p5.min.js"></script>
+    <script src="JS/vanta.topology.min.js"></script>
     <script>
         VANTA.TOPOLOGY({
             el: "#topoBG",
@@ -85,6 +85,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="sorting.js"></script>
+    <script src="JS/sorting.js"></script>
 </body>
 </html>
