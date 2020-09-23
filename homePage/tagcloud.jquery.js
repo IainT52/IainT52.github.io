@@ -88,8 +88,9 @@
 	}
 
 	function initContainer(tagContainer) {
-		tagContainer.height(1100); // <--- Have to remain as hardcoded values with HTML 5
-		tagContainer.width(800);   // <--- Have to remain as hardcoded values with HTML 5
+		tagContainer.height(options.height + 'px');
+		tagContainer.width(options.width + 'px');
+		
 		tagContainer.css( {
 			'overflow' : 'hidden',
 			'position' : 'relative'

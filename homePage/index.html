@@ -8,7 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <!-- StyleSheets/Fonts/Tab Icon-->
         <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- https://github.com/jonsuh/hamburgers -->
+        <link rel="stylesheet" href="hamburgers.css">
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
         <link rel="icon" type="image/ico" href="/favicon.ico">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -17,7 +19,6 @@
         <script src="https://kit.fontawesome.com/1951006a4b.js" SameSite="None" crossorigin="anonymous"></script>
         <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     </head>
-
     <body>
 <!-- Preloader Screen -->
         <div class="preloader">
@@ -28,52 +29,126 @@
               </svg>
         </div>
 <!-- Home Page intro text -->
-        <div class="intro">
-            <span class="introTyping"></span>
-        </div>
-        <div class="name">
-            <p>Iain Tierney<span class="period">.</span></p>
-        </div>
-        <div class="about">
-            <p>01. University at Buffalo class of 2022.<br>
-                02. Majoring in Computer Science.<br>
-                03. Currently interested in Software Engineering.<br>
-                04. Based in the New York City region. <br></p>
+        <div class="introContainer">
+            <div class="intro">
+                <span class="introTyping"></span>
+            </div>
+            <div class="name">
+                <p>Iain Tierney<span class="period">.</span></p>
+            </div>
+            <div class="introBullets">
+                <p>01. University at Buffalo class of 2022.<br>
+                    02. Majoring in Computer Science.<br>
+                    03. Currently interested in Software Engineering.<br>
+                    04. Based in the New York City/Buffalo region. <br></p>
+            </div>
         </div>
 <!-- 3D Tag Cloud Ball Javascript plugin created by Nurul Ferdous-->
-        <div id="tagcloud">
-            <ul>
-            <li><a href="#"><span><i class="fab fa-python"></i></span></a></li>
-            <li><a href="#"><span><i class="fas fa-copyright"></i></span></a></li>
-            <li><a href="#"><span><i class="fab fa-js-square"></i></span></a></li>
-            <li><a href="#"><span><i class="fab fa-html5"></i></span></a></li>
-            <li><a href="#"><span><i class="fab fa-css3-alt"></i></span></a></li>
-            <li><a href="#"><span><i class="fab fa-java"></i></span></a></li>
-            <li><a href="#"><span class="text3D">Scala</span></a></li>
-            <li><a href="#"><span class="text3D">JQuery</span></a></li>
-            <li><a href="#"><span class="text3D">JSON</span></a></li>
-            </ul>
+        <div class="tagContainer">
+            <div class="proficiencyBar">
+            </div>
+            <div id="tagcloud">
+                <ul>
+                <li><a href="#"><span>Scala</span></a></li>
+                <li><a href="#"><span>Java</span></a></li>
+                <li><a href="#"><span>Python</span></a></li>
+                <li><a href="#"><span>HTML5</span></a></li>
+                <li><a href="#"><span>CSS3</span></a></li>
+                <li><a href="#"><span>JavaScript</span></a></li>
+                <li><a href="#"><span>C</span></a></li>
+                <li><a href="#"><span>Agile</span></a></li>
+                <li><a href="#"><span>Bootstrap</span></a></li>
+                <li><a href="#"><span>Git</span></a></li>
+                <li><a href="#"><span>JQuery</span></a></li>
+                <li><a href="#"><span>JSON</span></a></li>
+                </ul>
+            </div>
         </div>
+        
 <!-- Side Navigation Bar -->
         <nav class="sidenav">
             <p><img src="/logo.png"></img></p>
             <h1>Iain.</h1>
-            <a href="#"><span><i class="material-icons">house</i></span></a>
-            <a href="/audioVisualizer/audioVisualizer.html"><span><i class="material-icons">person</i></span></a>
-            <a href="#"><span><i class="material-icons">work</i></span></a>
-            <a href="#"><span><i class="material-icons">email</i></span></a>
+            <div class="navHover">
+                <a href="#"><span><i class="lnr lnr-home"></i></span></a>
+                <a href="#middle" onclick="scrollDown()"><span><i class="lnr lnr-user"></i></span></a>
+                <a href="/projectsPage/showcase.html" class="iconShake"><span><i class="lnr lnr-briefcase"></i></span></a>
+                <a href="#"><span><i class="lnr lnr-license"></i></span></a>
+            </div>
             <div class="lowsidenav">
                 <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/IainT52?tab=repositories" target="_blank"><i class="fab fa-github"></i></a>
             </div>
         </nav>
+
+<!-- SideNav Button for mobile -->
+<!-- <div class="mobileNav_Container"> -->
+    <button class="hamburger hamburger--spin mobileNav_Container" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner hamburgerStyle"></span>
+        </span>
+    </button>
+<!-- </div> -->
 <!-- Far right side email and aesthetic line -->
-        <!-- <div class="rightline">
-            <svg>
-                <polyline stroke="#1df0de" points="0,0 0,1000" stroke-width="10" fill="none"></polyline>
-                <polyline stroke="#1df0de" points="0,2000 0,1000" stroke-width="10" fill="none"></polyline>
-              </svg>
-        </div> -->
+        <div class="emailLine">
+            <div class="topLine"></div>
+            <a href="mailto:iaintier@buffalo.edu" class="emailText">iaintier@buffalo.edu</a>
+            <div class="btmLine"></div>
+        </div>
+<!-- Scroll Paper Airplane animation section -->
+<div class="animationContainer">
+    <img id="paperPlane" src="paperAirplane.png" alt="paperAirplane">
+</div>
+
+<!-- About me page underneath intro text and cloudtag  -->
+<div id="aboutContainer">
+    <div class="letterContainer">
+        <div class="onScroll_Letter">A</div>
+    </div>
+    <div class="letterContainer">
+        <div class="onScroll_Letter">B</div>
+    </div>
+    <div class="letterContainer">
+        <div class="onScroll_Letter">O</div>
+    </div>
+    <div class="letterContainer">
+        <div class="onScroll_Letter">U</div>
+    </div>
+    <div class="letterContainer">
+        <div class="onScroll_Letter">T</div>
+    </div>
+    &nbsp; &nbsp;
+    <div class="letterContainer">
+        <div class="onScroll_Second">M</div>
+    </div>
+    <div class="letterContainer">
+        <div class="onScroll_Second letterE">E</div>
+    </div>
+    <div class="letterContainer">
+        <div class="onScroll_Period">.</div>
+    </div>
+    <div class="aboutText">
+        <p>Hello! I'm Iain Tierney, a junior studying 
+            Computer Science. <br> <br>One of the main reasons
+            I decided to study Computer Science, had to
+            do with a passion for problem solving. Which
+            means I love to build anything from cool
+            websites (like this) to audio visualizers
+            (like the one on my Youtube channel to the right). 
+            I am always looking for opportunities to work on ambitious
+            projects with forward-thinking people.
+        </p>
+    </div>
+</div>
+<iframe class ="ytVid" width="560" height="315" 
+    src="https://www.youtube-nocookie.com/embed/bZ-BJHuTbS8" 
+    frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+    encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!-- Scrolling Animation scripts (GSAP animation) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenLite.min.js" integrity="sha512-pvDW4tehKKsohH97164HwKwRGFpzayEFWTVbk8HuUoLIQ7Jp+WLN5XYokVuoCj2aT6dy8ihbW8SRTG1k0W4mSQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TimelineLite.min.js" integrity="sha512-tSIDeirKC6suYILHqqPuZH3s0MvD4a5vCHXhBIcdmq4gQXZ2IB3fEYA5x2f3D2p/CbSqzKEvuTEVbS5VZ2u+ew==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/CSSPlugin.min.js" integrity="sha512-ocsFo48WU8Xq6Y1Lwi7psXRAujG9E4TKNR4q1DbrKzaaxOMTEoao/a+mDoB+cYzY4lwbyxvqjkp/ZA1/MNlfsg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/BezierPlugin.min.js" integrity="sha512-plyexAULVlTExvDn2yUZFJV9F8q+53MC/GpU9dEuNGXmrrI3J8Rcffjvxg3OOBALBvF+UILPLIBEoCeF2maqTQ==" crossorigin="anonymous"></script>
 <!-- Javascript plugin (typed.js) created by Matt Boldt www.mattboldt.com-->
         <script src="typed.js"></script>
         <script src="app.js" charset="utf-8"></script>

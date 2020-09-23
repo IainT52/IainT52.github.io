@@ -81,6 +81,7 @@ html body{
 	font-size: 21px;
     font-family: 'Share Tech Mono', monospace;
     background-color: #131314;
+    outline: none !important;
 }
 
 .navButtons{
@@ -91,20 +92,9 @@ html body{
 }
 
 .navButtons i{
-    font-size: 40px;
-    color: #818181;
-    text-shadow: -1px 0 #818181,
-                 -1px 0 #818181,
-                 -1px 2px #818181,
-                 -2px 1px #189e93,
-                 -2px 3px #189e93,
-                 -3px 2px #189e93,
-                 -3px 4px #189e93,
-                 -4px 3px #189e93,
-                 -4px 5px #189e93,
-                 -5px 4px #189e93,
-                 -5px 5px #189e93;
-    padding: 0 1rem 1rem 1rem;
+    font-size: 30px;
+    color: var(--main-theme-color);
+    padding: 0 .5rem 1rem .5rem;
 }
 
 .bar:hover {

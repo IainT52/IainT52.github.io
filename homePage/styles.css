@@ -9,7 +9,24 @@
 
 html body{
     background-color: #1f1f24;
+    min-height: 190vh;
+    max-height: 190vh;
     overflow: hidden;
+}
+
+/* Scrollbar */
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px;
+    border: 3px solid transparent;
 }
 
 .preloader {
@@ -33,7 +50,7 @@ html body{
     z-index: 100;
 }
 
-svg {
+.preloader svg {
     position: fixed;
     top: 50vh; left: 50vw; transform: translate(-50%, -50%);
     transform: translate(-50%, -50%) rotate(45deg) scale(1);
@@ -71,59 +88,81 @@ svg {
 }
 
 .sidenav {
-    height: 100vh;
-    width: 60px; 
-    position: fixed; 
-    z-index: 1; 
+    position: fixed;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    width: 60px;
+    z-index: 1;
     top: 0px; left: 0px;
-    background-color: #131314; 
-    overflow-x: hidden; 
-    padding-top: 16%;
+    background-color: #131314;
+    overflow: hidden;
+    box-shadow: -.1rem 0rem 2rem #000;
+}
+
+.lowsidenav {
+    margin-bottom: 40px;
 }
 
 .sidenav a {
-    padding: 30px 8px 15px 15px;
+    padding: 30px 8px 15px 10px;
     color: #818181;
     display: block;
 }
 
+.lowsidenav a {
+    padding: 3px 8px 3px 10px;
+    color: #818181;
+    font-size: 20px;
+}
+
+.sidenav a i {
+    font-size: 25px;
+}
+
+.lowsidenav a i {
+    font-size: 17px;
+}
+
 .sidenav a:hover {
     color: var(--main-theme-color);
-    transform: scale(1.3);
-    animation: wobble .2s linear infinite;
+    text-decoration: none;
+    transform: scale(1.2);
+    animation: none;
 }
 
 .sidenav .lowsidenav a:hover {
     color: var(--main-theme-color);
 }
 
-.sidenav a i {
-    font-size: 30px;
-}
-.lowsidenav a i {
-    font-size: 20px;
+.iconShake {
+    animation: wobble 3s linear infinite;
 }
 
-.sidenav .lowsidenav{
-    margin-top: 150px;
-}
-
-.sidenav .lowsidenav a {
-    padding: 20px 8px 15px 20px;
-    color: #818181;
-    display: block;
-    font-size: 20px;
+@keyframes wobble {
+    38%{transform: rotate(0deg); color: #818181;}
+    40% {transform: rotate(-6deg); color: var(--main-theme-color)}
+    44% {transform: rotate(6deg)}
+    48% {transform: rotate(-6deg)}
+    52% {transform: rotate(6deg)}
+    56% {transform: rotate(-6deg)}
+    60% {transform: rotate(6deg); color: var(--main-theme-color)}
+    62% {transform: rotate(0deg); color: #818181;}
 }
 
 .sidenav img {
     top: -1px; left: -10px;
     width: 79px;
     height: 79px;
-    z-index: 100;
+    z-index: 1;
     position: fixed;
 }
+
 .sidenav h1 {
-    top: 80px; left: 2px;
+    top: 80px; left: 3px;
     font-family: 'Permanent Marker', cursive;
     font-size: 25px;
     color: var(--main-theme-color);
@@ -132,9 +171,62 @@ svg {
     border-top: 1.5px solid lightgrey;
 }
 
-.intro {
-    margin-left: 12%;
-    margin-top: 10%;
+.navHover a::after {
+    content: '';
+    font-size: 8px;
+    letter-spacing: 1px;
+    position: absolute;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+}
+
+.navHover a:first-child::after {
+    content: 'HOME';
+    margin-left: -26px;
+    margin-top: 7px;
+}
+.navHover a:first-child + a::after {
+    content: 'ABOUT';
+    margin-left: -28px;
+    margin-top: 7px;
+}
+.navHover a:first-child + a + a::after {
+    content: 'PROJECTS';
+    margin-left: -35px;
+    margin-top: 7px;
+}
+.navHover a:first-child + a + a + a::after {
+    content: 'RESUME';
+    margin-left: -30px;
+    margin-top: 7px;
+}
+
+.navHover a:hover i{
+    opacity: 0;
+}
+
+.navHover a:hover::after{
+    opacity: 1;
+}
+
+.mobileNav_Container {
+    top:0; right:0;
+    position: fixed;
+    z-index: 5;
+    visibility: hidden;
+    outline: none !important;
+}
+
+.hamburgerStyle {
+    background-color: white !important;
+}
+
+.introContainer {
+    top: 0; left: 0;
+    position: absolute;
+    margin: 20vh 0 0 10vw;
     text-align: left;
 }
 
@@ -147,31 +239,27 @@ svg {
 }
 
 .name {
-    margin-left: 12%;
-    text-align: left;
     font-size: 110px;
     font-family: 'Bebas Neue', cursive;
     color: #e3dfe6;
 }
 
-.about {
-    margin-left: 12%;
-    text-align: left;
+.introBullets {
     font-size: 20px;
     font-family: 'Share Tech Mono', monospace;
     word-spacing: -3px;
     color:  grey;
+    white-space: normal;
 }
 
 .period {
-    font-size: 110px;
-    font-family: 'Bebas Neue', cursive;
     color: var(--main-theme-color);
 }
 
 #tagcloud {
-    margin: -20% 45%;
-    text-decoration: none;
+    margin-top: 10vh;
+    margin-left: 40vw;
+    overflow: hidden;
 }
 
 #tagcloud a{
@@ -180,16 +268,207 @@ svg {
     text-decoration: none;
 }
 
-.text3D {
+.emailLine {
+    position: fixed;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    width: 10px;
+    z-index: 1;
+    top: 0px; right: 20px;
+    /* border: 2px solid white; */
+}
+
+.topLine {
+    border: 1px solid grey;
+    border-radius: 10px;
+    position: fixed;
+    top: 0px; 
+    width: 2px;
+    height: 40.5vh;
+    right: 19px;
+    opacity: 50%;
+}
+
+.btmLine {
+    border: 1px solid grey;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 2px;
+    height: 40.5vh;
+    right: 18px;
+    opacity: 50%;
+}
+
+.emailText {
+    color: var(--main-theme-color);
+    writing-mode: vertical-rl;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.emailText:hover {
+    color: var(--main-theme-color);
     text-decoration: none;
 }
 
-@media screen and (max-width: 500px) {
-    .sidenav {visibility: hidden;}
-    .sidenav a {font-size: 18px;}
+/* ABOUT PAGE */
+
+.animationContainer {
+    top: -12vh;
+    z-index: -2;
+    height: 130vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#paperPlane{
+    opacity: 100%;
+    width: 100px;
+    height: 100px;
+    top: 30vh; left:-50px;
+    position: absolute;
+}
+
+#aboutContainer {
+    top: 100vh; left: 20vw;
+    position: absolute;
+}
+
+.letterContainer{
+    width:73px;
+    height: 150px;
+    display:inline-block;
+    overflow:hidden;
+    /* border: 2px solid white; */
+    margin-right: -10px;
+  }
+
+.onScroll_Letter{
+    font-family: fantasy;
+    color: white;
+    font-size: 110px;
+    line-height: 400px;
+    position: relative;
+    transition: all .25s linear;
+}
+
+.onScroll_Second {
+    font-family: fantasy;
+    color: var(--main-theme-color);
+    font-size: 110px;
+    position: relative;
+    transition: all .25s linear;
+}
+
+.letterE {
+    margin-left: 10px;
+}
+
+.onScroll_Period {
+    font-family: fantasy;
+    color: white;
+    font-size: 110px;
+    position: relative;
+    transition: all .25s linear;
+    margin-top: 18px;
+    z-index: 1;
+}
+
+.aboutText {
+    margin-top: 100px;
+    font-size: 20px;
+    width: 40vw;
+    font-family: 'Share Tech Mono', monospace;
+    word-spacing: -3px;
+    color:  grey;
+    white-space: normal;
+    transition: all 2s ease-in;
+    opacity: 0%;
+}
+
+.ytVid {
+    top: 170vh; left: 80vw;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-shadow: .1rem 0 3rem black;
+    border: 2px solid white;
+}
+
+@media screen and (max-width: 1200px) {
+    .ytVid {width: 350px; height: 200px;}
+}
+
+@media screen and (max-width: 1000px) {
+    .tagContainer {visibility: hidden;}
+    #aboutContainer {
+        left: 15vw;
+    }
 }
 
 @media screen and (max-width: 700px) {
-    .sidenav {padding-top: 15%;}
     .sidenav a {font-size: 25px;}
+    /* Need important for sidenav visibility to override js visiblity function */
+    .sidenav {visibility: hidden;}
+    .mobileNav_Container {visibility: visible;}
+    .sidenav a {font-size: 18px;}
+    .intro {margin-left: 0px;}
+    .emailLine{opacity: 0;}
+    #aboutContainer {top: 80vh;}
+    .letterContainer {margin-left: -40px;}
+    .onScroll_Letter {
+        font-size: 50px; 
+        line-height: 206px !important; 
+        left: 0px !important;}
+    .onScroll_Second {
+        font-size: 50px;
+        line-height: 206px !important;
+    }
+    .onScroll_Period {visibility: hidden;}
+    .aboutText {
+        width: 90vw;
+        margin-left: -10vw;
+        margin-top: auto;
+        opacity: 100% !important;
+    }
+    .ytVid {
+        left: 50vw;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .name{
+        font-size: 80px;
+    }
+    .intro span {
+        font-size: 17px;
+    }
+    .introBullets {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .sidenav {margin-top: 3vw;}
+    .lowsidenav {margin-top: -10vw;}
+    .topLine {height: 30vh;}
+    .btmLine {height: 30vh;}
+}
+
+@media screen and (max-height: 800px) {
+    body {
+        min-height: 200vh;
+        max-height: 200vh;
+    }
+    #aboutContainer {
+        top: 100vh;
+    }
+    .ytVid {
+        margin-top: 80vh;
+        left: 46vw;
+    }
 }

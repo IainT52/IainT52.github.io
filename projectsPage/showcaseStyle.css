@@ -29,7 +29,7 @@ a {
 #filter {
     z-index: -1;
     position: absolute;
-    min-width: 50%;
+    width: 50%;
     min-height: 100vh;
     top: 0; left: 0;
     background-color: blue;
@@ -39,7 +39,7 @@ a {
 #filterShadow {
     z-index: 1;
     position: absolute;
-    min-width: 50%;
+    width: 50%;
     min-height: 100vh;
     top: 0; right: 0;
     background-color: transparent;
@@ -50,7 +50,7 @@ a {
     top: 25vh; left: 0;
     width: 50%;
     position: relative;
-    animation: blur 2s linear;
+    animation: blur 1.5s linear;
     display: flex;
     padding: 3rem 0rem 3rem 0rem;
     overflow-x: scroll;
@@ -58,7 +58,7 @@ a {
 }
 
 @keyframes blur {
-    0%{filter: blur(100px);}
+    0%{filter: blur(50px);}
     100%{filter: blur(0px);}
 }
 /* ScrollBar only visible on mobile (to make scrolling through card deck easier) */
@@ -139,7 +139,7 @@ a {
 }
 
 .card-header h2 {
-    font-size: 20px;
+    font-size: 23px;
     margin: .25rem 0 auto;
     text-decoration: none;
     background: linear-gradient(90deg,#1df0de,#cf70ba);
@@ -149,6 +149,7 @@ a {
     background-clip: text;
     border: 0;
     display: inline-block;
+    cursor: default;
 }
 
 .headCard h1 {
@@ -160,15 +161,44 @@ a {
     color: black;
 }
 
-.author-name {
+.descriptionContainer {
     grid-area: auto;
     box-sizing: border-box;
+    color: white;
+    cursor: default;
 }
 
-.author-name-prefix {
+.description{
+    padding-bottom: 20px;
+}
+
+.description a{
     font-style: normal;
     font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 20px;
     color: #7a7a8c;
+    text-decoration: none;
+}
+
+.card:hover .description {
+    animation: wobble 3s linear;
+}
+/* Need both declarations for color and wobble
+to appear properly specificty reasons */
+.card:hover .description a{
+    animation: wobble 3s linear;
+}
+
+@keyframes wobble {
+    38%{transform: rotate(0deg); color: #818181;}
+    40% {transform: rotate(-1deg); color: #cf70ba}
+    44% {transform: rotate(1deg)}
+    48% {transform: rotate(-1deg)}
+    52% {transform: rotate(1deg)}
+    56% {transform: rotate(-1deg)}
+    60% {transform: rotate(1deg); color: #cf70ba}
+    62% {transform: rotate(0deg); color: #818181;}
 }
 
 .tags {
@@ -189,12 +219,13 @@ a {
     padding: .2rem .85rem .25rem;
     position: relative;
     display: inline-block;
+    cursor: default;
 }
 
 .headCard i {
-    color: #575b61;
-    font-size: 30px;
-    padding: .2rem .85rem .25rem;
+    color: black;
+    font-size: 25px;
+    padding: .2rem .5rem .25rem 0rem;
     position: relative;
     display: inline-block;
 }
@@ -202,6 +233,13 @@ a {
 @media screen and (max-width: 1400px) {
     .card-list {
         overflow: auto;
+        width: 80%;
+    }
+    #filter {
+        width: 80%
+    }
+    #filterShadow {
+        width: 20%;
     }
 }
 
@@ -213,9 +251,16 @@ a {
     .card-list {
         width: 100%;
         overflow: auto;
+        top: 20vh;
     }
 
     #filterShadow {
         visibility: hidden;
+    }
+}
+
+@media screen and (max-height: 630px) {
+    .card-list {
+        top: 11vh;
     }
 }

@@ -3,6 +3,7 @@
 	--main-theme-color: #1df0de;
 	margin: 0;
 	padding: 0;
+	display: inline-block;
 	font-family: 'Share Tech Mono', monospace;
 }
 
@@ -10,13 +11,80 @@ body{
 	overflow: hidden;
 }
 
-.canvas-wrap { position:relative; width:800px; height:600px }
-.canvas-wrap canvas { position:absolute; top:0; left:0; z-index:0 }
-.container { position:absolute; top:87vh; left:32vw; color: white;}
-.container h2 {font-size: 20px; font-family: 'Share Tech Mono', monospace;}
+.canvas-wrap {
+	position:fixed; 
+	top:0; right:0; bottom:0; left:0; 
+}
+.canvas-wrap canvas { 
+	position:absolute;
+	top:0; left:0;
+	z-index:0;
+}
+
+.navControl {
+    position: fixed;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-width: 100vw;
+	min-height: 200px;
+	max-height: 200px;
+    bottom: 0; left: 0;
+    background-color: transparent;
+}
+
+.controlsContainer {
+	padding-top: 1vh;
+	/* border: 2px solid white; */
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.middleLine {
+	height: 10px;
+	width: 500px;
+	border-top: 2px solid grey;
+	border-radius: 3px;
+}
+
+.navControl h2 {
+	font-family: 'Share Tech Mono', monospace;
+	font-size: 29px;
+	color: white;
+	display: inline-block;
+}
+
+.textbox { 
+    background-color: transparent !important;
+	border: 2px solid var(--main-theme-color) !important;
+	color: darkgrey !important;
+    border-radius: 5px;
+    outline: none;
+	height:23px;
+	width: 500px !important;
+}
+
+#audioSlider {
+	width: 500px;
+}
+
+#audioTimer {
+	padding-left: 310px;
+	color: var(--main-theme-color);
+	font-size: 30px;
+	font-family: 'Share Tech Mono', monospace;
+	letter-spacing: -3px;
+}
 
 .logoFor_Canvas {
 	visibility: hidden;
+	top: 50vh; left: 50vw;
+	transform: translate(-50%,-50%);
 }
 
 .button {
@@ -29,30 +97,13 @@ body{
 	margin-left: 3px;
 	margin-right: 3px;
 	cursor: pointer;
-}
-
-.textbox { 
-    background-color: transparent !important;
-	border: 2px solid var(--main-theme-color) !important;
-	color: darkgrey !important;
-    border-radius: 5px;
-    outline: none;
-    height:23px;
-    width: 400px;
+	outline: none !important;
 }
 
 .soundcloud {
 	font-size: 40px;
 	color: orange;
 	margin-right: 5px;
-}
-
-#audioTimer {
-	margin-left: 5px;
-	color: var(--main-theme-color);
-	font-size: 30px;
-	font-family: 'Share Tech Mono', monospace;
-	letter-spacing: -3px;
 }
 
 #artwork {
@@ -85,12 +136,21 @@ input[type=range]{
     appearance: none;
 }
 
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: transparent !important;
+}
+
 input[type=range]::-webkit-slider-runnable-track {
     width: 600px;
     height: 10px;
-    background: #ddd;
+    background: transparent !important;
     border: none;
-    border-radius: 3px;
+	border-radius: 3px;
+	cursor: pointer;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -100,13 +160,24 @@ input[type=range]::-webkit-slider-thumb {
     width: 20px;
     border-radius: 50%;
     background: var(--main-theme-color);
-    margin-top: -4px;
+	margin-top: -4px;
+	cursor: pointer;
 }
 
-input[type=range]:focus {
-    outline: none;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ccc;
+@media screen and (max-width: 505px) {
+	#audioTimer {
+		padding-left: 110px;
+	}
+	#audioSlider {
+		width: 300px;
+	}
+	.controlsContainer {
+		justify-content: flex-start;
+	}
+	.middleLine {
+		width: 300px;
+	}
+	.navControl h2 {
+		font-size: 20px;
+	}
 }

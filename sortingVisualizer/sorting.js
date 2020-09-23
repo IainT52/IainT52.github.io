@@ -5,7 +5,7 @@ curSorting = false,
 pauseBool = false,
 speed = 300;
 
-const heightRange_min = 20, 
+const heightRange_min = 20,
 heightRange_max = $('.barContainer').height() - 100;
 
 // Initialize bars on load and render modal tutorial pop up
@@ -68,7 +68,7 @@ function switchCase_Algo(){
 async function selectionSort() {
     if (!curSorting) {
         curSorting = true;
-        // I could run to i < unsortedArray.length - 1 but 1 iteration longer to change opacity of last bar
+        // I could run to i < unsortedArray.length - 1 but running one iteration longer to allow changing the opacity of the last bar
         for (let i = 0; i < unsortedArray.length; i++) {
             let min = i;
             for (let j = i; j < unsortedArray.length; j++) {
@@ -163,6 +163,7 @@ function togglePlay() {
 // Clear previous bars and reshuffle new bars 
 function randomize() {
     $("#inputState").val('Sorting Algorithm'); 
+    speed = 300;
     curSorting = false;
     $(".barContainer").empty();
     // Recalculate numberOf_Bars (23 is arbitrary but works well to achieve optimal bar width)

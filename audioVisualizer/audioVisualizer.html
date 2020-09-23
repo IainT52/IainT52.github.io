@@ -18,38 +18,32 @@
 		<canvas id="visualizer_render">
 		</canvas>
 		<!-- Audio Controls -->
-		<div class="container">
-			<h2>&nbsp &nbsp&nbsp Input Soundcloud track here:</h2>
-			<form class="form-inline" >
-				<form>
-					<div class="form-group">
-						<label for="textbox"><a href="https://soundcloud.com/discover" target="_blank"><i class="fab fa-soundcloud soundcloud"></i></a></label>
-						<input 
-							id="input_URL"
-							type="textbox"
-							class="form-control textbox"
-							name="URL"
-							style="width: 350px;"
-							value="https://soundcloud.com/dominicfike/3-nights"
-							onclick="textboxAuto_Highlight()"
-						/>
-					</div>
-					<div class="form-group">
-						<button type="button" class="button" id="submitButton" onclick="handlePlay_Button()">
-							Submit
-						</button>
-						<button type="button" class="button" id="toggle" onclick="togglePlay()">
-							&#x23f5;
-						</button>
-					</div>
-				</form>
-				<form class="form-inline">
-					<input style="width: 550px;" onclick="audio.currentTime = $('#audioSlider').val * (audio.duration / 100);" type="range" id="audioSlider">
-					<div id="form-group">
-						<h1 id="audioTimer"></h1>
-					</div>
-				</form>
-			</form>
+		<div class="navControl">
+			<div clas="navContainer">
+				<div class="form-group">
+					<label for="textbox"><a href="https://soundcloud.com/discover" target="_blank"><i class="fab fa-soundcloud soundcloud"></i></a></label>
+					<h2>Input Soundcloud track here:</h2>
+					<input
+						id="input_URL"
+						type="textbox"
+						class="form-control textbox"
+						name="URL"
+						value="https://soundcloud.com/mattmaeson/cringe"
+						onclick="textboxAuto_Highlight()"
+					/>
+				</div>
+				<div class="middleLine"></div>
+				<input  onmouseover="mouseOver = true" onmouseout="mouseOver = false" onclick="sliderTime()" type="range" id="audioSlider"/>
+				<div class="controlsContainer">
+					<button type="button" class="button" id="toggle" onclick="togglePlay()">
+						&#x23f5;
+					</button>
+					<button type="button" class="button" id="submitButton" onclick="handlePlay_Button()">
+						Submit
+					</button>
+					<h1 id="audioTimer"></h1>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- Logo for circle -->
@@ -73,9 +67,13 @@
 			  		</button>
 				</div>
 				<div class="modal-body">
-				  You can immediately press the play button to play the pre-selected 
+				  You can immediately press the submit button to play the pre-selected 
 				  Soundcloud track or click the Soundcloud button below to find your own track!<br>
-				  <strong>Format:</strong> https://soundcloud.com/user/track
+				  <strong>Play:</strong><br> 
+				  Hit the submit button to find and play the selected song. Note: Some artists on
+				  Soundcloud do not allow their songs to be played through the API.<br>
+				  <strong>Format:</strong><br> 
+				  https://soundcloud.com/user/track
 				</div>
 				<div class="modal-footer">
 			  		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

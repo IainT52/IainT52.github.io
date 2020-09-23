@@ -1,9 +1,7 @@
 var canvas, canvasCtx, source, context, analyser, frequencyArray, rads,
-	center_x, center_y, radius, bgBar_Count, 
-	bar_x_term, bar_y_term, bar_width,
+	center_x, center_y, radius, bgBar_Count, bar_x_term, bar_y_term, bar_width,
 	bar_height, react_x, react_y, curFrequency, rotations, inputURL,
-	trackName, audio, toggle_Play,
-	artist, title, img_url, logoImg;
+	trackName, audio, toggle_Play, artist, title, img_url, logoImg, mouseOver;
 
 var client_id = "8df0d68fcc1920c92fc389b89e7ce20f";
 
@@ -15,6 +13,7 @@ radius = 0;
 rotations = 0;
 curFrequency = 0;
 toggle_Play = false;
+mouseOver = false;
 
 function initCanvas_Audio() {
 	// Modal pop-up tutorial
@@ -73,7 +72,6 @@ function getUser_Info(url) {
 	$.getJSON(url, function(user) {
 		var user_id = user.id;
 		artist = user.username;
-		console.log("User" + user_id);
 		var tracks = "https://api.soundcloud.com/users/" + user_id + "/tracks.json?client_id=" + client_id + "&limit=200";
 		getTrack_Info(tracks);
 	});
@@ -117,19 +115,28 @@ function playAudio() {
 	
 	$("#artistname").html(artist);
 	$("#songname").html(title);
-	$("#pagetitle").html(title);
+	$("#pagetitle").html(title + " by " + artist);
 	$("#artwork").attr("src", img_url);
 	// JS styling to prevent border form appearing before image does
 	$("#artwork").css("opacity", "100");
+}
+
+function sliderTime() {
+	audio.currentTime = $('#audioSlider').val() * (audio.duration * .01);
 }
 			
 function canvasUpdater() {
 	window.requestAnimationFrame(canvasUpdater);
 	refresh_canvasSize();
 
-	// Update audio timer
-	$("#audioSlider").val((100 / audio.duration) * audio.currentTime);
-	$("#audioTimer").html(Math.floor(audio.currentTime / 60) + ":" + (Math.floor(audio.currentTime % 60) < 10 ? "0" : "") + Math.floor(audio.currentTime % 60));
+	// Update audio timer and slider
+	// Slider
+	if(!mouseOver) $("#audioSlider").val((100 / audio.duration) * audio.currentTime);
+	// Timer
+	let minute = Math.floor(audio.currentTime / 60),
+	tenthsSec = Math.floor(audio.currentTime % 60) < 10 ? "0" : "",
+	hundredthsSec = Math.floor(audio.currentTime % 60);
+	$('#audioTimer').html(minute + ':' + tenthsSec + hundredthsSec);
 	
 	// Draw Canvas
 	canvasCtx.fillStyle = " #1f1f24";
@@ -167,7 +174,8 @@ function canvasUpdater() {
 
 	center_x = canvas.width / 2 - (react_x * 0.007);
 	center_y = canvas.height / 2 - (react_y * 0.007);
-	radius =  70 + (curFrequency * 0.003);
+	let radiusMultiplier = $('body').width() / 25;
+	radius = radiusMultiplier + (curFrequency * 0.003);
 
 	// Elipse middle
 	canvasCtx.fillStyle = "white";
@@ -213,5 +221,5 @@ function canvasUpdater() {
 	canvasCtx.fill();
 	
 	// Logo
-	canvasCtx.drawImage(logoImg,center_x - (65 + curFrequency*.0018),center_y - (65 + curFrequency*.0018),radius + 65,radius + 65);
+	canvasCtx.drawImage(logoImg,center_x - (radiusMultiplier + curFrequency*.0018),center_y - (radiusMultiplier + curFrequency*.0018),radius + radiusMultiplier,radius + radiusMultiplier);
 }
