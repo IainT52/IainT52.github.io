@@ -11,6 +11,66 @@ a {
     text-decoration: none;
 }
 
+/* Preloader to prevent load buffering from being seen */
+
+.preloader {
+    position: fixed;
+    background-color: #1f1f24;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    align-items: center;
+}
+
+.preloader img {
+    opacity: 0;
+    animation: fadein 3s linear;
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    top: 50vh; left: 50vw; transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.preloader svg {
+    position: fixed;
+    top: 50vh; left: 50vw; transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+  
+.stroke-animation {
+    animation: stroke-spacing 4.2s ease-in-out;
+    animation-direction: forward;
+    stroke: #1df0de;
+}
+
+@keyframes fadein {
+    0% {opacity: 0;}
+    33% {opacity: 0;}
+    60% {opacity: 20;}
+    100% {opacity: 100;}
+}
+  
+@keyframes stroke-spacing {
+    0% {
+      stroke-dasharray: 0 200;
+    }
+    45% {
+      stroke-dashoffset: 0;
+      stroke-dasharray: 20 0;
+    }
+    50% {
+      stroke-dashoffset: -200;
+      stroke-dasharray: 200 200;
+    }
+    100% {
+      stroke-dashoffset: -200;
+      stroke-dasharray: 200 200;
+    }
+}
+
 .logo {
     z-index: 2;
     top: 0; left:0;
@@ -50,17 +110,12 @@ a {
     top: 25vh; left: 0;
     width: 50%;
     position: relative;
-    animation: blur 1.5s linear;
     display: flex;
     padding: 3rem 0rem 3rem 0rem;
     overflow-x: scroll;
     overflow: hidden;
 }
 
-@keyframes blur {
-    0%{filter: blur(50px);}
-    100%{filter: blur(0px);}
-}
 /* ScrollBar only visible on mobile (to make scrolling through card deck easier) */
 .card-list::-webkit-scrollbar {
     width: 10px;

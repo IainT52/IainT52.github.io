@@ -3,7 +3,6 @@ $(function(){
     // PreLoader
     $('.preloader svg').delay(2000).fadeOut('slow');
     $('.preloader p').delay(2500).fadeOut(1000);
-    $('.preloader h1').delay(2000).fadeOut('slow');
     $('.preloader').delay(2300).fadeOut(1000);
 
     // Tagcloud sphere
