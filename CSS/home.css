@@ -327,8 +327,8 @@ html body{
 
 #paperPlane{
     opacity: 100%;
-    width: 150px;
-    height: 150px;
+    width: 110px;
+    height: 110px;
     top: 30vh; left:-50px;
     position: absolute;
 }
