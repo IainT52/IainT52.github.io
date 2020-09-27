@@ -1,12 +1,13 @@
 var canvas, canvasCtx, source, context, analyser, frequencyArray, rads,
 	center_x, center_y, radius, bgBar_Count, bar_x_term, bar_y_term, bar_width,
-	bar_height, react_x, react_y, curFrequency, rotations, inputURL,
+	bar_height, react_x, react_y, curFrequency, rotations, inputURL, shapeRotation,
 	trackName, audio, toggle_Play, artist, title, img_url, logoImg, mouseOver;
 
 var client_id = "8df0d68fcc1920c92fc389b89e7ce20f";
 
 // init variables
 bgBar_Count = 200;
+shapeRotation = 0;
 react_x = 0;
 react_y = 0;
 radius = 0;
@@ -14,6 +15,7 @@ rotations = 0;
 curFrequency = 0;
 toggle_Play = false;
 mouseOver = false;
+rotateNeg = true;
 
 function initCanvas_Audio() {
 	// Modal pop-up tutorial
@@ -50,29 +52,26 @@ function refresh_canvasSize() {
 }
 
 function handlePlay_Button() {
-	var inputURL = $("#input_URL").val();
-	if(inputURL.search("soundcloud.com") != -1 && inputURL.search("api.soundcloud.com") == -1) { // is it a regular old soundcloud link
-		var splitBySlash = inputURL.replace(/http:\/\/|https:\/\//gi, "").split("/"); // get rid of "http://" / "https://" in front of url and then split by slashes
-		if(splitBySlash.length == 3) { // make sure there's an actual song included at the end
-			var soundCloudUserURL = "http://" + splitBySlash[0] + "/" + splitBySlash[1];
-			trackName = splitBySlash[2];
-			var apiResovleURL = "https://api.soundcloud.com/resolve.json?url=" + soundCloudUserURL + "&client_id=" + client_id;
-			getUser_Info(apiResovleURL);
-		}
-		else if (splitBySlash.length == 2) { // there's a user but no song
-			// do whatever here
-		}
-		else {
-			// do whatever here
-		}
-	}
+    let userURL = $("#user_URL").val();
+    // Check for invalid url
+    if(userURL.search("soundcloud.com") == -1 || userURL.search("api.soundcloud.com") != -1){
+        return;
+    }
+    let strippedURL = userURL.replace(/http:\/\/|https:\/\//, "").split("/");
+    // Check for user and song
+    if(strippedURL.length == 3) {
+        let soundCloudUserURL = "http://" + strippedURL[0] + "/" + strippedURL[1];
+        trackName = strippedURL[2];
+        let apiURL = "https://api.soundcloud.com/resolve.json?url=" + soundCloudUserURL + "&client_id=" + client_id;
+        getUser_Info(apiURL);
+    }
 }
 
 function getUser_Info(url) {
 	$.getJSON(url, function(user) {
-		var user_id = user.id;
+		let user_id = user.id;
 		artist = user.username;
-		var tracks = "https://api.soundcloud.com/users/" + user_id + "/tracks.json?client_id=" + client_id + "&limit=200";
+		let tracks = "https://api.soundcloud.com/users/" + user_id + "/tracks.json?client_id=" + client_id + "&limit=200";
 		getTrack_Info(tracks);
 	});
 }
@@ -145,7 +144,7 @@ function canvasUpdater() {
 	rotations = rotations + curFrequency * 0.0000001;
 		
 	react_x = 0;
-	react_y = 0;	
+	react_y = 0;
 	curFrequency = 0;
 
 	analyser.getByteFrequencyData(frequencyArray);
@@ -175,42 +174,47 @@ function canvasUpdater() {
 	center_x = canvas.width / 2 - (react_x * 0.007);
 	center_y = canvas.height / 2 - (react_y * 0.007);
 	let radiusMultiplier = $('body').width() / 25;
-	radius = radiusMultiplier + (curFrequency * 0.003);
+    radius = radiusMultiplier + (curFrequency * 0.003);
+    // Make shapes rotate
+    if(rotateNeg){shapeRotation += 1;}
+    else {shapeRotation -= 1;}
+    if (shapeRotation > 200){rotateNeg = false;}
+    if (shapeRotation < -200){rotateNeg = true;}
 
 	// Elipse middle
 	canvasCtx.fillStyle = "white";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / 2), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / (2 + (shapeRotation/3)*.01)), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	//Elipse right 3
 	canvasCtx.fillStyle = "#ff0000";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x + 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / 4, 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x + 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	//Elipse right 2
 	canvasCtx.fillStyle = "#00ff37";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x - 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / 4, 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x - 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	//Elipse right 1
 	canvasCtx.fillStyle = "#ffea00";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / 4, 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	// Elipse left 3
 	canvasCtx.fillStyle = "#00ccff";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x - 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / 4), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x - 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	// Elipse left 2
 	canvasCtx.fillStyle = "#f700ff";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x + 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / 4), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x + 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	// Elipse left 1
 	canvasCtx.fillStyle = "#0011ff";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / 4), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
 	canvasCtx.fill();
 
 
