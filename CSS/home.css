@@ -266,6 +266,8 @@ html body{
     font-family: 'Bebas Neue', cursive;
     color: var(--main-theme-color);
     text-decoration: none;
+    cursor: default;
+    white-space: nowrap;
 }
 
 .emailLine {
