@@ -21,16 +21,17 @@
         </div>
             <select id="inputState" class="button algoSelector">
                 <option selected>Sorting Algorithm</option>
-                <option onclick="bubbleSort()" >Bubble Sort</option>
-                <option onclick="insertionSort()">Insertion Sort</option>
-                <option onclick="selectionSort()">Selection Sort</option>
-            </select> 
+                <option>Bubble Sort</option>
+                <option>Insertion Sort</option>
+                <option>Selection Sort</option>
+                <option>Quick Sort</option>
+            </select>
             <button type="button" class="button" id="randButton" onclick="randomize()">
                 Randomize
             </button>
             <button type="button" class="button" id="pauseButton" onclick="togglePlay()">
                 Pause
-            </button> 
+            </button>
     </div>
     <div class="barContainer"></div>
 
@@ -51,13 +52,15 @@
                     Hover over the bars to conrtol the speed of the 
                     algorithm and animation. Moving your mouse to the 
                     right will decrease the speed while moving it to the left will increase the speed.<br>
+                    <i>Suggestion:</i> Move your mouse over the bars to maneuver to the center bars. From there, 
+                    move left or right to change the speed.
                     <strong>Randomize:</strong><br>
                     The randomize button resets the size (width) of 
                     the bars and shuffles their heights.<br>
                     <strong>Pause:</strong><br>
                     The Pause button will pause the animation. You can 
                     press it again to resume the animation. <br>
-                    Note: You can pause and switch algorithms halfway 
+                    <i>Note:</i> You can pause and switch algorithms halfway 
                     through a sort.
 				</div>
 		  	</div>
