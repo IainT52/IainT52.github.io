@@ -21,6 +21,7 @@ $(window).resize(function () {
 
 // Get selected Sorting Algorithm when the options change
 $("select.algoSelector").change(function(){
+    speed = 300;
     switchCase_Algo();
 });
 
@@ -52,6 +53,9 @@ function switchCase_Algo(){
         case "Selection Sort":
             selectionSort();
             break;
+        case "Quick Sort":
+            init_quickSort(unsortedArray,0,unsortedArray.length -1);
+            break;
         default:
             break;
     }
@@ -59,16 +63,61 @@ function switchCase_Algo(){
 
 
 
-// SORTING ALGORITHMS..............................
+// ..............................SORTING ALGORITHMS..............................
 
 
+
+
+// Quick Sort Algorithm
+async function init_quickSort(arr,start,end){
+    if(!curSorting){
+        curSorting = true;
+        await quickSort(arr,start,end);
+        curSorting = false;
+    }
+}
+async function quickSort(arr, start, end){
+    if(curSorting){
+        if (start >= end){
+            return;
+        }
+        let index = await partition(arr,start,end);
+        await quickSort(arr,start, index - 1);
+        await quickSort(arr,index + 1,end);
+        return arr;
+    }
+}
+
+async function partition(arr,start,end){
+    if(curSorting){
+        let pivotIndex = start;
+        let pivotVal = arr[end];
+        $("#" + end).css("background-color", "#b5ff4d");
+        await new Promise(resolve => setTimeout(resolve, speed + (speed * .5)));
+        for (let i = start; i < end; i++){
+            if (arr[i] < pivotVal && curSorting){
+                await visualSwap(i, pivotIndex);
+                $("#" + i).css("background-color", "#1df0de");
+                $("#" + pivotIndex).css("background-color", "#1df0de");
+                [arr[i],arr[pivotIndex]] = [arr[pivotIndex],arr[i]];
+                pivotIndex++;
+            }
+        }
+        await visualSwap(end, pivotIndex);
+        $("#" + end).css("background-color", "#1df0de");
+        $("#" + pivotIndex).css("background-color", "#1df0de");
+        [arr[end],arr[pivotIndex]] = [arr[pivotIndex],arr[end]];
+        return pivotIndex;
+    }
+}
 
 
 // Selection Sorting Algorithm
 async function selectionSort() {
     if (!curSorting) {
         curSorting = true;
-        // I could run to i < unsortedArray.length - 1 but running one iteration longer to allow changing the opacity of the last bar
+        // I could run to i < unsortedArray.length - 1 but it is running one iteration 
+        // longer to change the opacity of the last bar
         for (let i = 0; i < unsortedArray.length; i++) {
             let min = i;
             for (let j = i; j < unsortedArray.length; j++) {
@@ -149,7 +198,7 @@ async function bubbleSort() {
 // Toggle play and pause sorting
 function togglePlay() {
     if(pauseBool) {
-        pauseBool = false; 
+        pauseBool = false;
         $("#pauseButton").html("Pause");
         switchCase_Algo();
     }
@@ -162,6 +211,9 @@ function togglePlay() {
 
 // Clear previous bars and reshuffle new bars 
 function randomize() {
+    //Check play/pause button
+    if(pauseBool == true) togglePlay();
+    // Update html option selector
     $("#inputState").val('Sorting Algorithm'); 
     speed = 300;
     curSorting = false;
@@ -210,5 +262,5 @@ function visualSwap(i, j) {
     $("#" + j).css("background-color", "#cf70ba");
     $("#" + i).animate({ height: unsortedArray[j] + "px" }, speed);
     $("#" + j).animate({ height: unsortedArray[i] + "px" }, speed);
-    return new Promise(resolve => setTimeout(resolve, speed + (speed * .05)));
+    return new Promise(resolve => setTimeout(resolve, speed + (speed * .05 )));
 }
