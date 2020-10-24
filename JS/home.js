@@ -13,6 +13,13 @@ $(function(){
     $('.introBullets').hide().delay(3600).fadeIn(5000);
     // Paper Plane fade in
     $('#paperPlane').hide().delay(3600).fadeIn(5000);
+
+    // Check for MAC OS to deal with font rendering issues
+    if (navigator.appVersion.indexOf("Mac")!=-1){
+        $('.onScroll_Letter').css("font-family", "'Anton', sans-serif");
+        $('.onScroll_Second').css("font-family", "'Anton', sans-serif");
+        $('.onScroll_Period').css("font-family", "'Anton', sans-serif");
+    }
 })
 
 // Forces page scroll up before page load
@@ -139,7 +146,6 @@ $hamburger.on("click", function(e) {
 // javascript and no media queries.
 $(window).resize(function() {
     if ($('body').width() > 700) {
-        console.log($('body').width())
         $('.sidenav').css("visibility","visible");
     }  
     if ($('body').width() < 700) {
