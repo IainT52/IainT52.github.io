@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Krona+One&family=Roboto+Mono&family=Share+Tech+Mono&family=Pacifico&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Krona+One&family=Roboto+Mono&family=Anton&family=Share+Tech+Mono&family=Pacifico&family=Permanent+Marker&display=swap');
 
 :root {
     --main-theme-color: #1df0de;
@@ -345,12 +345,11 @@ html body{
     height: 150px;
     display:inline-block;
     overflow:hidden;
-    /* border: 2px solid white; */
     margin-right: -10px;
   }
 
 .onScroll_Letter{
-    font-family: fantasy;
+    font-family: fantasy, 'Anton', sans-serif;
     color: white;
     font-size: 110px;
     line-height: 400px;
@@ -359,7 +358,7 @@ html body{
 }
 
 .onScroll_Second {
-    font-family: fantasy;
+    font-family: fantasy, 'Anton', sans-serif;
     color: var(--main-theme-color);
     font-size: 110px;
     position: relative;
@@ -371,7 +370,7 @@ html body{
 }
 
 .onScroll_Period {
-    font-family: fantasy;
+    font-family: fantasy, 'Anton', sans-serif;
     color: white;
     font-size: 110px;
     position: relative;
