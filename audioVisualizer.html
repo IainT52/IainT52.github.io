@@ -22,7 +22,7 @@
 			<div clas="navContainer">
 				<div class="form-group">
 					<label for="textbox"><a href="https://soundcloud.com/discover" target="_blank"><i class="fab fa-soundcloud soundcloud"></i></a></label>
-					<h2>Input Soundcloud track here:</h2>
+					<h2>Search tracks here:</h2>
 					<input
 						id="user_URL"
 						type="textbox"
@@ -38,7 +38,7 @@
 					<button type="button" class="button" id="toggle" onclick="togglePlay()">
 						&#x23f5;
 					</button>
-					<button type="button" class="button" id="submitButton" onclick="handlePlay_Button()">
+					<button type="button" class="button" id="submitButton" onclick="handleSubmit_Button()">
 						Submit
 					</button>
 					<h1 id="audioTimer"></h1>
@@ -69,13 +69,15 @@
 				<div class="modal-body">
 				  You can immediately press the submit button to play the pre-selected
                   Soundcloud track or you can click the Soundcloud button below to find your own track!
-                  The second method requires you to paste the url into the textbox below and hit submit.<br>
+                  Instead of using a URL, feel free to use a keyword search to find the best recommended 
+                  song to play! <br>
 				  <strong>Play:</strong><br>
 				  Hit the submit button to find and play the selected song.<br> Note: Some artists on
                   Soundcloud do not allow their songs to be played through the API. Specifically,
                   an artist that requires a Soundcloud subscription (Go+) to listen to a song.<br>
 				  <strong>Format:</strong><br>
-				  https://soundcloud.com/user/track
+                   - Option 1: https://soundcloud.com/user/track
+                   - Option 2: Keyword search
 				</div>
 				<div class="modal-footer">
 			  		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -43,7 +43,7 @@ function initCanvas_Audio() {
 }
 
 function textboxAuto_Highlight() {
-	$("#input_URL").select();
+	$("#user_URL").select();
 }
 
 function refresh_canvasSize() {
@@ -51,10 +51,22 @@ function refresh_canvasSize() {
 	canvas.height = window.innerHeight;
 }
 
-function handlePlay_Button() {
+function handleSubmit_Button() {
     let userURL = $("#user_URL").val();
-    // Check for invalid url
-    if(userURL.search("soundcloud.com") == -1 || userURL.search("api.soundcloud.com") != -1){
+    // Check for search query instead of url
+    if(userURL.search("soundcloud.com") === -1 || userURL.search("api.soundcloud.com") !== -1){
+        fetch('https://api.soundcloud.com/tracks/?client_id=' + client_id + '&q=' + userURL).then(function(response) {
+            if (response.status !== 200) {
+                alert('Looks like there was a problem. Status Code' + response.status);
+                return;
+            }
+            response.json().then(function(data) {
+            if (data[0] == null){
+                alert('Sorry! No search results were found. Try searching by track name and/or user.');
+            }
+            else getSearch_Results(data);
+            })
+        })
         return;
     }
     let strippedURL = userURL.replace(/http:\/\/|https:\/\//, "").split("/");
@@ -66,7 +78,20 @@ function handlePlay_Button() {
         getUser_Info(apiURL);
     }
 }
+// Stores user and track info when a SoundCloud link
+// is not used for a query. This function is given
+// a list of objects from SoundCloud search results.
+function getSearch_Results(tracks) {
+    inputURL = tracks[0].stream_url + "?client_id=" + client_id;
+    title = tracks[0].title;
+    img_url = tracks[0].artwork_url;
+    artist = tracks[0].user.username;
+    playAudio();
+}
 
+// Find the given user on SoundCLoud and store their username as well as 
+// create an API link for that users tracks.
+// *Only called when a SoundCloud link is used to search for a track*
 function getUser_Info(url) {
 	$.getJSON(url, function(user) {
 		let user_id = user.id;
@@ -76,6 +101,9 @@ function getUser_Info(url) {
 	});
 }
 
+// Search a list of user tracks for the specific track. If found,
+// get a stream url, title, and track image from SoundCloud.
+// *Only called when a SoundCloud link is used to search for a track*
 function getTrack_Info(url) {
 	$.getJSON(url, function(tracks) {
 		$(tracks).each(function(index) {
@@ -85,12 +113,13 @@ function getTrack_Info(url) {
 				title = track.title;
 				img_url = track.artwork_url;
 				playAudio();
-				return false;//To break out of each loop
+				return false;
 			}
 		});
 	});
 }
 
+// Handles the play/pause button functionality
 function togglePlay() {
 	if(toggle_Play) {
 		toggle_Play = false;
@@ -102,7 +131,9 @@ function togglePlay() {
 		audio.play();
 	}
 }
-			
+
+// Sets up and plays the selected track.
+// Initializes artwork and artist info for the HTML page.
 function playAudio() {
 	context.resume()
 	
@@ -120,10 +151,15 @@ function playAudio() {
 	$("#artwork").css("opacity", "100");
 }
 
+// Fast forwards/ rewinds the current time of the track depending
+// on the audio slider position.
 function sliderTime() {
 	audio.currentTime = $('#audioSlider').val() * (audio.duration * .01);
 }
-			
+
+// Clears and Updates the HTML canvas (using JS requestAnimationFrame())
+// and updates the audio slider/timer.
+// Calculates the frequency every call to update the visualizer.
 function canvasUpdater() {
 	window.requestAnimationFrame(canvasUpdater);
 	refresh_canvasSize();
