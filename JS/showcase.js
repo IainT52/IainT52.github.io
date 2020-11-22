@@ -6,10 +6,13 @@ $(function(){
 });
 
 // Card showcase scrolling animation by moving your mouse over the cards
+// Calculates the mouse position when the mouse is over the card section element.
+// I created an arbitrary equation to calculate the rate of the card movement to
+// the left and right respectively. Asnyc functions and promises are used to 
+// prevent the function from being called too rapidly causing jittery movements.
 $(document).ready(function() {
     setTimeout(function() {
         let section = $('section'),
-        prevMouse = 0,
         mouseLeftSide = false,
         mouseRightSide = false;
         var mouseX = 0
@@ -54,3 +57,10 @@ $(document).ready(function() {
         });
     }, 2000);
 });
+
+// Refreshes the page to prevent issue where the cards freeze after "View Project" click
+// The timeout waits 100ms to allow the page to navigate to the project before refreshing.
+function refreshCards(){
+    setTimeout(function(){ location.reload(); }, 100);
+    return false;
+}
