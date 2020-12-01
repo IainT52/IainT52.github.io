@@ -17,6 +17,10 @@ toggle_Play = false;
 mouseOver = false;
 rotateNeg = true;
 
+// Initialize a new audio object to play a selected
+// track from the SoundCloud API. 
+// Initialize the HTML5 canvas for the visualizer as
+// well as set the logo variable to the logo element.
 function initCanvas_Audio() {
 	// Modal pop-up tutorial
 	$('#myModal').modal('show');
@@ -42,15 +46,20 @@ function initCanvas_Audio() {
   	canvasUpdater();
 }
 
+// Highlights the text within the search box to allow for quicker deletion
 function textboxAuto_Highlight() {
 	$("#user_URL").select();
 }
 
+// Refreshes the canvas size to prevent resizing issues
 function refresh_canvasSize() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 }
 
+// Parses the input of the search box by checking for
+// a SoundCloud link or a keyword search. Handles errors
+// in the url format.
 function handleSubmit_Button() {
     let userURL = $("#user_URL").val();
     // Check for search query instead of url
@@ -78,6 +87,7 @@ function handleSubmit_Button() {
         getUser_Info(apiURL);
     }
 }
+
 // Stores user and track info when a SoundCloud link
 // is not used for a query. This function is given
 // a list of objects from SoundCloud search results.
