@@ -1,7 +1,7 @@
 var canvas, canvasCtx, source, context, analyser, frequencyArray, rads,
 	center_x, center_y, radius, bgBar_Count, bar_x_term, bar_y_term, bar_width,
 	bar_height, react_x, react_y, curFrequency, rotations, inputURL, shapeRotation,
-	trackName, audio, toggle_Play, artist, title, img_url, logoImg, mouseOver;
+	trackName, audio, toggle_Play, artist, title, img_url, mouseOver;
 
 var client_id = "8df0d68fcc1920c92fc389b89e7ce20f";
 
