@@ -24,14 +24,19 @@
     <!-- Background Globe -->
     <div id="backgroundAnimation"></div>
     <!-- Card Showcase -->
-    <div id="filter"></div>
+    <div id="filter">
+    </div>
     <div id="filterShadow"></div>
+    <div class="btn-container">
+        <a class="prev" onclick="moveSlideShow(-1)">&#10094;</a>
+        <a class="next" onclick="moveSlideShow(1)">&#10095;</a>
+    </div>
     <section class="card-list">
 <!-- Head Card -->
         <article class="headCard">
             <header class="card-header">
             <p>2019 - Present</p>
-            <h1><strong>Projects</strong></h1>
+            <h1><strong>PROJECTS</strong></h1>
             </header>
             </div>
             <div>
@@ -41,7 +46,30 @@
             </div>
         </article>
 <!-- Article # 1-->
-        <article class="card">
+        <article class="card" id="1">
+            <header class="card-header">
+            <p>January 2021</p>
+            <h2>PicToCartoon</h2>
+            </header>
+
+            <div class="descriptionContainer">
+                <div class="description"><a href="https://pictocartoon.herokuapp.com/" onclick="refreshCards()" target="_blank"><i>View Project</i></a></div>
+                A fun project to convert 
+                a picture into a cartoon using
+                Tensorflow 2 and Goole QuickDraw.
+                </div>
+            </div>
+            <div class="tags">
+            <a href="#">Python</a>
+            <a href="#">Flask</a>
+            <a href="#">TensorFlow</a>
+            <a href="#">QuickDraw API</a>
+            <a href="#">HTML/CSS/JS</a>
+            <a href="#">OpenCV</a>
+            </div>
+        </article>
+<!-- Article # 2-->
+        <article class="card" id="2">
             <header class="card-header">
             <p>September 2020</p>
             <h2>Sorting Visualizer</h2>
@@ -59,10 +87,11 @@
             <a href="#">html</a>
             <a href="#">css</a>
             <a href="#">jQuery</a>
+            <a href="#">Async/Await</a>
             </div>
         </article>
-<!-- Article # 2-->
-        <article class="card">
+<!-- Article # 3-->
+        <article class="card" id="3">
             <header class="card-header">
             <p>August 2020</p>
             <h2>Audio Visualizer</h2>
@@ -83,8 +112,8 @@
             </div>
         </article>
       
-<!-- Article # 3-->
-        <article class="card">
+<!-- Article # 4-->
+        <article class="card" id="4">
             <header class="card-header">
             <p>April 2020</p>
             <h2>Dynamic Memory Allocator</h2>
@@ -102,27 +131,28 @@
             <a href="#">Makefile</a>
             </div>
         </article>
-<!-- Article # 4-->
-        <article class="card">
+<!-- Article # 5-->
+        <article class="card" id="5">
             <header class="card-header">
-            <p>September 2020 - Current</p>
+            <p>August 2020</p>
             <h2>Health Tracker Web App</h2>
             </header>
 
             <div class="descriptionContainer">
             <div class="description"><a href="https://massivemuscles.herokuapp.com/" onclick="refreshCards()" target="_blank"><i>View Project</i></a></div>
-            <div class="description"><a href="https://github.com/UB-CSE/course-project-a3-massive-muscles" onclick="refreshCards()" target="_blank"><i>More info</i></a></div>
-                Looking to migrate this project to React JS. Please be patient with heroku website load time.
+                Health and fitness tracker with user specific
+                health metrics and tracking. Designed for
+                all levels of fitness.
             </div>
             </div>
             <div class="tags">
             <a href="#">SQLite</a>
             <a href="#">Flask</a>
             <a href="#">Python</a>
-            <a href="#">Nix</a>
+            <a href="#">HTML/CSS/JS</a>
             </div>
         </article>
-<!-- Article # 5-->
+<!-- Article # 6-->
         <article class="card">
             <header class="card-header">
             <p>Fall 2019</p>
@@ -142,7 +172,7 @@
             <a href="#">SocketIO</a>
             </div>
         </article>
-<!-- Article # 6-->
+<!-- Article # 7-->
         <article class="card">
             <header class="card-header">
             <p>July 2020</p>

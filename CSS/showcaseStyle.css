@@ -20,8 +20,12 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 11;
     align-items: center;
+}
+
+.section {
+    animation-duration: 2s;
 }
 
 .preloader img {
@@ -31,7 +35,7 @@ a {
     height: 150px;
     position: fixed;
     top: 50vh; left: 50vw; transform: translate(-50%, -50%);
-    z-index: 100;
+    z-index: 5;
 }
 
 .preloader svg {
@@ -81,15 +85,15 @@ a {
     z-index: -2;
     position: absolute;
     display: block;
-    min-width: 100%;
+    min-width: 100vw;
     min-height: 100vh;
     top: 0; left: 0; right: 0; bottom: 0;
 }
 
 #filter {
-    z-index: -1;
+    z-index:-1;
     position: absolute;
-    width: 50%;
+    width: 60%;
     min-height: 100vh;
     top: 0; left: 0;
     background-color: blue;
@@ -107,7 +111,7 @@ a {
 #filterShadow {
     z-index: 1;
     position: absolute;
-    width: 50%;
+    width: 40%;
     min-height: 100vh;
     top: 0; right: 0;
     background-color: transparent;
@@ -116,7 +120,7 @@ a {
 
 .card-list {
     top: 25vh; left: 0;
-    width: 50%;
+    width: 60%;
     position: relative;
     display: flex;
     padding: 3rem 0rem 3rem 0rem;
@@ -124,7 +128,7 @@ a {
     overflow: hidden;
 }
 
-/* ScrollBar only visible on mobile (to make scrolling through card deck easier) */
+/* Card ScrollBar */
 .card-list::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -293,21 +297,39 @@ to appear properly specificty reasons */
     display: inline-block;
 }
 
-@media screen and (max-width: 1600px) {
-    .card-list {
-        width: 60%;
-    }
-    #filter {
-        width: 60%;
-    }
-    #filterShadow {
-        width: 40%;
-    }
+/* Prev and Next Buttons */
+
+.btn-container {
+    position: absolute;
+    width: 60%;
+}
+
+.prev, .next {
+    z-index: 10;
+    cursor: pointer;
+    position: absolute;
+    top: 50vh;
+    transform: translate(0%, -50%);
+    width: auto;
+    padding: 20px;
+    color: #1df0de;
+    font-weight: bold;
+    font-size: 40px;
+    border-radius: 0 10px 10px 0;
+    user-select: none;
+}
+.next {
+    right: 0;
+    float: right;
+    border-radius: 10px 0 0 10px;
+}
+
+.prev:hover, .next:hover {
+    background: rgba(143, 96, 129, 0.6);
 }
 
 @media screen and (max-width: 1400px) {
     .card-list {
-        overflow: auto;
         width: 80%;
     }
     #filter {
@@ -315,6 +337,9 @@ to appear properly specificty reasons */
     }
     #filterShadow {
         width: 20%;
+    }
+    .btn-container {
+        width: 80%;
     }
 }
 
@@ -331,6 +356,9 @@ to appear properly specificty reasons */
 
     #filterShadow {
         visibility: hidden;
+    }
+    .btn-container {
+        width: 100%;
     }
 }
 
