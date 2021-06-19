@@ -39,7 +39,7 @@
 						&#x23f5;
 					</button>
 					<button type="button" class="button" id="submitButton" onclick="handleSubmit_Button()">
-						Submit
+						Find Track
 					</button>
 					<h1 id="audioTimer"></h1>
 				</div>
@@ -56,6 +56,12 @@
 		<h1 id="artistname"></h1>
 		<h1 id="songname"></h1>
 	</div>
+    <!-- Search results -->
+    <div class="resultsContainer">
+        <ul>
+            <h3>No Search Results</h3>
+        </ul>
+    </div>
 	<!-- Bootstrap modal notification (Popup tutorial on page load for how to use audio reaction) -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -67,17 +73,17 @@
 			  		</button>
 				</div>
 				<div class="modal-body">
-				  You can immediately press the submit button to play the pre-selected
-                  Soundcloud track or you can click the Soundcloud button below to find your own track!
-                  Instead of using a URL, feel free to use a keyword search to find the best recommended 
-                  song to play! <br>
-				  <strong>Play:</strong><br>
-				  Hit the submit button to find and play the selected song.<br> Note: Some artists on
-                  Soundcloud do not allow their songs to be played through the API. Specifically,
-                  an artist that requires a Soundcloud subscription (Go+) to listen to a song.<br>
-				  <strong>Format:</strong><br>
-                   - Option 1: https://soundcloud.com/user/track
-                   - Option 2: Keyword search
+                  <strong>Finding a song: </strong>
+                    Use the search bar below to <b>1.</b> Enter a URL 
+                    <b>2.</b> Search for a song with a keyword search <b>3.</b> Use the pre-selected URL and hit "Find Track".
+                  <br><br>
+                  <strong>Play: </strong>
+				    Press the "Find Track" button to search and play songs.
+                    You can pause and resume the music with the play/pause button.
+                  <br><br>
+				  <strong>Note: </strong>
+                    Any artists that require a SoundCloud Go+ subscription to listen to thier music
+                    do not allow their songs to be played through the API. 
 				</div>
 				<div class="modal-footer">
 			  		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

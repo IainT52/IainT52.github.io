@@ -1,9 +1,14 @@
-var canvas, canvasCtx, source, context, analyser, frequencyArray, rads,
-	center_x, center_y, radius, bgBar_Count, bar_x_term, bar_y_term, bar_width,
-	bar_height, react_x, react_y, curFrequency, rotations, inputURL, shapeRotation,
-	trackName, audio, toggle_Play, artist, title, img_url, mouseOver;
+var source, context, analyser, frequencyArray, inputURL,
+    trackName, audio, toggle_Play, artist, title, img_url,
+    mouseOver, search_results, canvas, canvasCtx, rads,
+    center_x, center_y, radius, bgBar_Count, bar_x_term, 
+    ar_y_term, bar_width, bar_height, react_x, react_y, 
+    curFrequency, rotations, shapeRotation;
 
-var client_id = "8df0d68fcc1920c92fc389b89e7ce20f";
+// Not a private API key for Massive Muscles - SoundCloud
+// no longer gives exclusive API keys while they rework
+// their system.
+const client_id = "8df0d68fcc1920c92fc389b89e7ce20f";
 
 // init variables
 bgBar_Count = 200;
@@ -62,6 +67,10 @@ function refresh_canvasSize() {
 // in the url format.
 function handleSubmit_Button() {
     let userURL = $("#user_URL").val();
+    // Remove previous search results
+    $( ".resultsContainer ul").empty();
+    search_results = [];
+    
     // Check for search query instead of url
     if(userURL.search("soundcloud.com") === -1 || userURL.search("api.soundcloud.com") !== -1){
         fetch('https://api.soundcloud.com/tracks/?client_id=' + client_id + '&q=' + userURL).then(function(response) {
@@ -80,7 +89,7 @@ function handleSubmit_Button() {
     }
     let strippedURL = userURL.replace(/http:\/\/|https:\/\//, "").split("/");
     // Check for user and song
-    if(strippedURL.length == 3) {
+    if(strippedURL.length === 3) {
         let soundCloudUserURL = "http://" + strippedURL[0] + "/" + strippedURL[1];
         trackName = strippedURL[2];
         let apiURL = "https://api.soundcloud.com/resolve.json?url=" + soundCloudUserURL + "&client_id=" + client_id;
@@ -96,6 +105,32 @@ function getSearch_Results(tracks) {
     title = tracks[0].title;
     img_url = tracks[0].artwork_url;
     artist = tracks[0].user.username;
+    displaySearch_Results(tracks);
+    playAudio();
+}
+
+function displaySearch_Results(tracks) {
+    for (let i=0; i < tracks.length; i++){
+        search_results.push(tracks[i].stream_url + "?client_id=" + client_id);
+
+        title = tracks[i].title;
+        img_url = tracks[i].artwork_url;
+        artist = tracks[i].user.username;
+        $('<li onClick="playSearch_Results(this.id)" id="'+ i +'"><img src="'+ img_url + '"></img><h3>'+ title +
+        '</h3><p>'+ artist +'</p></li>').appendTo('.resultsContainer ul');
+    }
+    $("#0").css("background", "rgba(0, 105, 204, 0.6)");
+}
+
+// Called when a search resulsts list element is selected. 
+// Plays the selected song from the search results and updates 
+// the background of the list element for the old and new songs.
+function playSearch_Results(id){
+    inputURL = search_results[id];
+    for (let i=0; i < search_results.length; i++){
+        $('#' + i).css("background", "transparent");
+    }
+    $('#' + id).css("background", "rgba(0, 105, 204, 0.6)");
     playAudio();
 }
 
@@ -118,7 +153,7 @@ function getTrack_Info(url) {
 	$.getJSON(url, function(tracks) {
 		$(tracks).each(function(index) {
 			track = tracks[index];
-    		if(track.permalink == trackName) {
+    		if(track.title.toLowerCase() === trackName.toLowerCase()) {
 				inputURL = track.stream_url + "?client_id=" + client_id;
 				title = track.title;
 				img_url = track.artwork_url;
