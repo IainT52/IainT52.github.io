@@ -70,7 +70,7 @@ function handleSubmit_Button() {
     // Remove previous search results
     $( ".resultsContainer ul").empty();
     search_results = [];
-    
+
     // Check for search query instead of url
     if(userURL.search("soundcloud.com") === -1 || userURL.search("api.soundcloud.com") !== -1){
         fetch('https://api.soundcloud.com/tracks/?client_id=' + client_id + '&q=' + userURL).then(function(response) {
@@ -102,20 +102,21 @@ function handleSubmit_Button() {
 // a list of objects from SoundCloud search results.
 function getSearch_Results(tracks) {
     inputURL = tracks[0].stream_url + "?client_id=" + client_id;
+    displaySearch_Results(tracks);
     title = tracks[0].title;
     img_url = tracks[0].artwork_url;
     artist = tracks[0].user.username;
-    displaySearch_Results(tracks);
     playAudio();
 }
 
 function displaySearch_Results(tracks) {
     for (let i=0; i < tracks.length; i++){
-        search_results.push(tracks[i].stream_url + "?client_id=" + client_id);
-
         title = tracks[i].title;
         img_url = tracks[i].artwork_url;
         artist = tracks[i].user.username;
+        result_object = {"title": title, "img_url": img_url, "artist": artist};
+        search_results.push([tracks[i].stream_url + "?client_id=" + client_id, result_object]);
+
         $('<li onClick="playSearch_Results(this.id)" id="'+ i +'"><img src="'+ img_url + '"></img><h3>'+ title +
         '</h3><p>'+ artist +'</p></li>').appendTo('.resultsContainer ul');
     }
@@ -126,11 +127,14 @@ function displaySearch_Results(tracks) {
 // Plays the selected song from the search results and updates 
 // the background of the list element for the old and new songs.
 function playSearch_Results(id){
-    inputURL = search_results[id];
+    inputURL = search_results[id][0];
     for (let i=0; i < search_results.length; i++){
         $('#' + i).css("background", "transparent");
     }
     $('#' + id).css("background", "rgba(0, 105, 204, 0.6)");
+    title = search_results[id][1].title;
+    img_url = search_results[id][1].img_url;
+    artist = search_results[id][1].artist;
     playAudio();
 }
 
