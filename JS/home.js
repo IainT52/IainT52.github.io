@@ -74,7 +74,7 @@ const flightPath = {
         {x: 800, y: 120},
         {x: 1100, y: -200},
         {x: 1400, y: -200},
-        {x: 1500, y: 600},
+        {x: 1500, y: 800},
     ]
 }
 
@@ -86,7 +86,7 @@ $(document).scroll(function() {
         $('#paperPlane').css("opacity","100%");
         animBool = false;
         tween.add(
-            TweenLite.to('#paperPlane',8, {
+            TweenLite.to('#paperPlane',9, {
                 bezier: flightPath,
                 ease: Power1.easeInOut,
             }, "paperPlane")
