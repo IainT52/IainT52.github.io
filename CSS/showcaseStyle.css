@@ -353,7 +353,9 @@ to appear properly specificty reasons */
         overflow: auto;
         top: 20vh;
     }
-
+    #filter {
+        visibility: hidden;
+    }
     #filterShadow {
         visibility: hidden;
     }
