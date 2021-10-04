@@ -74,6 +74,16 @@ function handleSubmit_Button() {
     // Check for search query instead of url
     if(userURL.search("soundcloud.com") === -1 || userURL.search("api.soundcloud.com") !== -1){
         fetch('https://api.soundcloud.com/tracks/?client_id=' + client_id + '&q=' + userURL).then(function(response) {
+            // TRYING TO FIX SOUNDCLOUD API ISSUES BELOW....GOING TO COME BACK TO THIS LATER
+        // console.log("fetching")
+        // fetch('https://api.soundcloud.com/tracks/?q=' + userURL,  {
+        //     headers: {
+        //         'accept': 'application/json; charset=utf-8',
+        //         'Content-Type': 'application/x-www-form-urlencoded',
+        //         'Authorization': 'OAuth ' + client_id
+        //     },
+        //     body: JSON.stringify()
+        // }).then(function(response) {
             if (response.status !== 200) {
                 alert('Looks like there was a problem. Status Code' + response.status);
                 return;
@@ -142,7 +152,7 @@ function playSearch_Results(id){
 // create an API link for that users tracks.
 // *Only called when a SoundCloud link is used to search for a track*
 function getUser_Info(url) {
-	$.getJSON(url, function(user) {
+	$.getJSON('https://api.soundcloud.com/tracks', function(user) {
 		let user_id = user.id;
 		artist = user.username;
 		let tracks = "https://api.soundcloud.com/users/" + user_id + "/tracks.json?client_id=" + client_id + "&limit=200";
