@@ -21,7 +21,6 @@ $(window).resize(function () {
 
 // Get selected Sorting Algorithm when the options change
 $("select.algoSelector").change(function(){
-    speed = 300;
     switchCase_Algo();
 });
 
@@ -29,15 +28,33 @@ $("select.algoSelector").change(function(){
 // Set interval is required to refresh '.bar' DOM elements as they are destroyed 
 // after every sort.
 $(function() {
-    window.setInterval(function(){
-        $('.bar').mousemove(function(e) {
-            var mouseX = e.pageX,
-            offset = $('body').width() * .50;
-            calcSpeed = (5000 / $('body').width() * ((mouseX - offset)/2));
-            if(calcSpeed <= 0) speed = 1;
-            else speed = calcSpeed
-        });
-      }, 2000);
+    $('.barContainer').on('mousemove', '.bar', function(e) {
+        var mouseX = e.pageX;
+        var container = $('.barContainer');
+        var containerOffset = container.offset().left;
+        var containerWidth = container.width();
+        var relativeX = mouseX - containerOffset;
+        
+        if (relativeX >= 0) {
+            // Map relativeX (0 to containerWidth) to speed percentage (1 to 100)
+            var speedPercent = (relativeX / containerWidth) * 100;
+            if (speedPercent < 1) speedPercent = 1;
+            if (speedPercent > 100) speedPercent = 100;
+            
+            // Update slider value
+            $('#speedSlider').val(speedPercent);
+            
+            // Calculate delay (speed) inversely
+            // 100% speed = 1ms delay, 1% speed = 500ms delay
+            speed = 500 - (speedPercent / 100) * 499;
+        }
+    });
+    
+    // Slider event listener
+    $('#speedSlider').on('input', function() {
+        var speedPercent = $(this).val();
+        speed = 500 - (speedPercent / 100) * 499;
+    });
 });
 
 // Switch case to match selected algorithm with function call
@@ -215,7 +232,6 @@ function randomize() {
     if(pauseBool == true) togglePlay();
     // Update html option selector
     $("#inputState").val('Sorting Algorithm'); 
-    speed = 300;
     curSorting = false;
     $(".barContainer").empty();
     // Recalculate numberOf_Bars (23 is arbitrary but works well to achieve optimal bar width)
@@ -247,7 +263,7 @@ function createDiv_Bars(arr) {
 
 // Recalculates the bars' width on screen adjustments and for creating new bars
 function calculateBar_Width() {
-    let pixelsLeft = $(".barContainer").width() - (numberOf_Bars * 10);
+    let pixelsLeft = $(".barContainer").width() - (numberOf_Bars * 4);
     let barWidth = Math.floor(pixelsLeft / numberOf_Bars);
     if (barWidth < 1) {
         numberOf_Bars = Math.floor(numberOf_Bars*.7);

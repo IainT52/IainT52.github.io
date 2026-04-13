@@ -42,19 +42,13 @@ html body{
 .bar {
     width: 10px;
     height: 50px;
-    margin: 0 5px 0 5px;
+    margin: 0 2px;
     background-color: var(--main-theme-color);
-    box-shadow:  0 1px #189e93,
-                 -1px 0 #189e93,
-                 -1px 2px #189e93,
-                 -2px 1px #189e93,
-                 -2px 3px #189e93,
-                 -3px 2px #189e93,
-                 -3px 4px #189e93,
-                 -4px 3px #189e93,
-                 -4px 5px #189e93,
-                 -5px 4px #189e93,
-                 -5px 5px #189e93;
+    /* Subtle bevel effect: light on left, dark on right */
+    background-image: linear-gradient(to right, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.3) 100%);
+    border-radius: 2px 2px 0 0;
+    transition: background-color 0.2s ease;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .navControl {
@@ -74,14 +68,78 @@ html body{
 
 .button {
     margin: 0 .5rem .5rem .5rem;
-	background-color: transparent;
+	background-color: #131314;
 	border: 2px solid var(--second-theme-color);
 	border-radius: 4px;
 	color: var(--second-theme-color);
 	font-size: 21px;
     font-family: 'Share Tech Mono', monospace;
-    background-color: #131314;
     outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--second-theme-color);
+    color: #131314;
+    box-shadow: 0 0 15px var(--second-theme-color);
+}
+
+.sliderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0;
+    width: 80%;
+}
+
+.sliderContainer label {
+    margin-bottom: 0.5rem;
+    font-size: 18px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #333;
+    outline: none;
+    transition: background 0.3s;
+}
+
+.slider:hover {
+    background: #444;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--main-theme-color);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--main-theme-color);
+    transition: transform 0.1s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--main-theme-color);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--main-theme-color);
+    transition: transform 0.1s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
 }
 
 .navButtons{
@@ -114,8 +172,8 @@ html body{
         left: auto; bottom: auto;
         top: 0; right:0;
         display: flex;
-        flex-direction: column;
-        padding-top: 2rem;
+        flex-direction: row;
+        padding-top: 1rem;
     }
 }
 

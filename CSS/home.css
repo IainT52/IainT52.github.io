@@ -9,9 +9,7 @@
 
 html body{
     background-color: #1f1f24;
-    min-height: 190vh;
-    max-height: 190vh;
-    overflow: hidden;
+    min-height: 100vh;
 }
 
 /* Scrollbar */
@@ -93,13 +91,13 @@ html body{
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    flex-wrap: wrap;
     min-height: 100vh;
     width: 60px;
     z-index: 1;
     top: 0px; left: 0px;
     background-color: #131314;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal overflow shifts */
     box-shadow: -.1rem 0rem 2rem #000;
 }
 
@@ -140,6 +138,7 @@ html body{
 
 .iconShake {
     animation: wobble 3s linear infinite;
+    display: inline-block;
 }
 
 @keyframes wobble {
@@ -171,36 +170,36 @@ html body{
     border-top: 1.5px solid lightgrey;
 }
 
+.navHover a {
+    position: relative;
+}
+
 .navHover a::after {
     content: '';
     font-size: 8px;
     letter-spacing: 1px;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     opacity: 0;
     transition: all 0.5s ease-out;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .navHover a:first-child::after {
     content: 'HOME';
-    margin-left: -26px;
-    margin-top: 7px;
 }
 .navHover a:first-child + a::after {
     content: 'ABOUT';
-    margin-left: -28px;
-    margin-top: 7px;
 }
 .navHover a:first-child + a + a::after {
     content: 'PROJECTS';
-    margin-left: -35px;
-    margin-top: 7px;
 }
 .navHover a:first-child + a + a + a::after {
     content: 'RESUME';
-    margin-left: -30px;
-    margin-top: 7px;
 }
 
 .navHover a:hover i{
@@ -417,7 +416,21 @@ html body{
     .sidenav a {font-size: 18px;}
     .intro {margin-left: 0px;}
     .emailLine{opacity: 0;}
-    #aboutContainer {top: 80vh;}
+    
+    .introContainer {
+        position: relative;
+        margin: 10vh 5vw 0 5vw;
+        top: auto;
+        left: auto;
+    }
+    
+    #aboutContainer {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin: 10vh 5vw;
+    }
+    
     .letterContainer {margin-left: -40px;}
     .onScroll_Letter {
         font-size: 50px; 
@@ -456,11 +469,16 @@ html body{
 }
 
 @media screen and (max-height: 800px) {
-    body {
-        min-height: 200vh;
-        max-height: 200vh;
-    }
     #aboutContainer {
         top: 100vh;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .sidenav a {
+        padding: 15px 8px 10px 10px;
+    }
+    .lowsidenav {
+        margin-bottom: 10px;
     }
 }

@@ -32,6 +32,10 @@
             <button type="button" class="button" id="pauseButton" onclick="togglePlay()">
                 Pause
             </button>
+            <div class="sliderContainer">
+                <label for="speedSlider" style="color: var(--main-theme-color); font-family: 'Share Tech Mono', monospace;">Speed</label>
+                <input type="range" id="speedSlider" min="1" max="100" value="40" class="slider">
+            </div>
     </div>
     <div class="barContainer"></div>
 
@@ -49,11 +53,9 @@
 				</div>
 				<div class="modal-body">
                     <strong>Speed:</strong><br>
-                    Hover over the bars to control the speed of the 
-                    algorithm and animation. Moving your mouse to the 
-                    right will decrease the speed and moving to the left will increase it.<br>
-                    <i>Suggestion:</i> Move your mouse to the center (horizontally) of the bars. From there, 
-                    move left or right to change the speed.
+                    Hover over the bars or use the slider in the sidebar to control the speed. 
+                    Moving your mouse or the slider to the right will increase the speed.<br>
+                    <i>Suggestion:</i> Start on the left for a slower pace, and move right to speed up.
                     <strong>Randomize:</strong><br>
                     Resets the size (width) of 
                     the bars and shuffles their heights.<br>
