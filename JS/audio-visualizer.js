@@ -30,9 +30,6 @@ rotateNeg = true;
 // Initialize the HTML5 canvas for the visualizer as
 // well as set the logo variable to the logo element.
 function initCanvas_Audio() {
-	// Modal pop-up tutorial
-	$('#myModal').modal('show');
-
 	canvas = $("#visualizer_render")[0];
 	canvasCtx = canvas.getContext("2d");
 	refresh_canvasSize();
@@ -40,10 +37,21 @@ function initCanvas_Audio() {
 	logoImg = $("#logo")[0];
 
 	audio = new Audio();
+	audio.volume = 0.2;
 	audio.crossOrigin = "anonymous";
 	audio.controls = true;
 	audio.loop = false;
 	audio.autoplay = false;
+	audio.src = "data:audio/mp4;base64," + tempSong;
+	artist = "Matt Maeson";
+	title = "Cringe";
+	img_url = "cringe_album_art.png";
+	$("#artistname").html(artist);
+	$("#songname").html(title);
+	$("#artwork").attr("src", img_url);
+	$("#artwork").css("opacity", "1");
+	
+	showToast("Hit play to test with the default song!");
 	// Audio Context to convert frequency to array of numbers
 	context = new AudioContext();
 	analyser = context.createAnalyser();
@@ -74,70 +82,54 @@ function handleSubmit_Button() {
     $( ".resultsContainer ul").empty();
     search_results = [];
 
-    // (temporary fix until SoundCloud API is available again)
-    playAudio();
-    return
-
-    // Check for search query instead of url
-    if(userURL.search("soundcloud.com") === -1 || userURL.search("api.soundcloud.com") !== -1){
-        fetch('https://api.soundcloud.com/tracks/?client_id=' + client_id + '&q=' + userURL).then(function(response) {
-            // TRYING TO FIX SOUNDCLOUD API ISSUES BELOW....GOING TO COME BACK TO THIS LATER
-        // console.log("fetching")
-        // fetch('https://api.soundcloud.com/tracks/?q=' + userURL,  {
-        //     headers: {
-        //         'accept': 'application/json; charset=utf-8',
-        //         'Content-Type': 'application/x-www-form-urlencoded',
-        //         'Authorization': 'OAuth ' + client_id
-        //     },
-        //     body: JSON.stringify()
-        // }).then(function(response) {
+    // Use Audius API
+    fetch('https://api.audius.co/v1/tracks/search?query=' + encodeURIComponent(userURL))
+        .then(function(response) {
             if (response.status !== 200) {
-                alert('Looks like there was a problem. Status Code' + response.status);
+                alert('Looks like there was a problem. Status Code: ' + response.status);
                 return;
             }
             response.json().then(function(data) {
-            if (data[0] == null){
-                alert('Sorry! No search results were found. Try searching by track name and/or user.');
-            }
-            else getSearch_Results(data);
-            })
+                if (!data.data || data.data.length === 0){
+                    $( ".resultsContainer ul").append('<h3>No search results found.</h3>');
+                    $(".resultsContainer").show();
+                } else {
+                    getSearch_Results(data.data);
+                }
+            });
         })
-        return;
-    }
-    let strippedURL = userURL.replace(/http:\/\/|https:\/\//, "").split("/");
-    // Check for user and song
-    if(strippedURL.length === 3) {
-        let soundCloudUserURL = "http://" + strippedURL[0] + "/" + strippedURL[1];
-        trackName = strippedURL[2];
-        let apiURL = "https://api.soundcloud.com/resolve.json?url=" + soundCloudUserURL + "&client_id=" + client_id;
-        getUser_Info(apiURL);
-    }
+        .catch(function(err) {
+            console.error('Fetch Error :-S', err);
+        });
 }
 
-// Stores user and track info when a SoundCloud link
-// is not used for a query. This function is given
-// a list of objects from SoundCloud search results.
+// Stores user and track info when a search is performed.
+// This function is given a list of objects from Audius search results.
 function getSearch_Results(tracks) {
-    inputURL = tracks[0].stream_url + "?client_id=" + client_id;
+    inputURL = 'https://api.audius.co/v1/tracks/' + tracks[0].track_id + '/stream';
     displaySearch_Results(tracks);
     title = tracks[0].title;
-    img_url = tracks[0].artwork_url;
-    artist = tracks[0].user.username;
+    img_url = tracks[0].artwork ? tracks[0].artwork['150x150'] : 'MISC/logo.png';
+    artist = tracks[0].user.name;
     playAudio();
 }
 
 function displaySearch_Results(tracks) {
     for (let i=0; i < tracks.length; i++){
-        title = tracks[i].title;
-        img_url = tracks[i].artwork_url;
-        artist = tracks[i].user.username;
+        let title = tracks[i].title;
+        let img_url = tracks[i].artwork ? tracks[i].artwork['150x150'] : 'MISC/logo.png';
+        let artist = tracks[i].user.name;
+        let stream_url = 'https://api.audius.co/v1/tracks/' + tracks[i].track_id + '/stream';
+        
         result_object = {"title": title, "img_url": img_url, "artist": artist};
-        search_results.push([tracks[i].stream_url + "?client_id=" + client_id, result_object]);
+        search_results.push([stream_url, result_object]);
 
-        $('<li onClick="playSearch_Results(this.id)" id="'+ i +'"><img src="'+ img_url + '"></img><h3>'+ title +
-        '</h3><p>'+ artist +'</p></li>').appendTo('.resultsContainer ul');
+        $('<li onClick="playSearch_Results(this.id)" id="'+ i +'"><img src="'+ img_url + '"><div class="result-info"><h3>'+ title +
+        '</h3><p>'+ artist +'</p></div></li>').appendTo('.resultsContainer ul');
     }
     $("#0").css("background", "rgba(0, 105, 204, 0.6)");
+    // Show results container
+    $(".resultsContainer").show();
 }
 
 // Called when a search results list element is selected. 
@@ -155,35 +147,7 @@ function playSearch_Results(id){
     playAudio();
 }
 
-// Find the given user on SoundCLoud and store their username as well as 
-// create an API link for that users tracks.
-// *Only called when a SoundCloud link is used to search for a track*
-function getUser_Info(url) {
-	$.getJSON('https://api.soundcloud.com/tracks', function(user) {
-		let user_id = user.id;
-		artist = user.username;
-		let tracks = "https://api.soundcloud.com/users/" + user_id + "/tracks.json?client_id=" + client_id + "&limit=200";
-		getTrack_Info(tracks);
-	});
-}
 
-// Search a list of user tracks for the specific track. If found,
-// get a stream url, title, and track image from SoundCloud.
-// *Only called when a SoundCloud link is used to search for a track*
-function getTrack_Info(url) {
-	$.getJSON(url, function(tracks) {
-		$(tracks).each(function(index) {
-			track = tracks[index];
-    		if(track.title.toLowerCase() === trackName.toLowerCase()) {
-				inputURL = track.stream_url + "?client_id=" + client_id;
-				title = track.title;
-				img_url = track.artwork_url;
-				playAudio();
-				return false;
-			}
-		});
-	});
-}
 
 // Handles the play/pause button functionality
 function togglePlay() {
@@ -194,6 +158,9 @@ function togglePlay() {
 	} else {
 		toggle_Play = true;
 		$("#toggle").html("&#10074;&#10074;");
+		if (context && context.state === 'suspended') {
+			context.resume();
+		}
 		audio.play();
 	}
 }
@@ -203,9 +170,7 @@ function togglePlay() {
 function playAudio() {
 	context.resume()
 	
-	// audio.src = inputURL;
-    // (temporary fix until SoundCloud API is available again)
-    audio.src = "data:audio/mp3;base64," + tempSong
+	audio.src = inputURL;
 	
 	toggle_Play = true;
 	document.getElementById("toggle").innerHTML = "&#10074;&#10074;";
@@ -332,4 +297,39 @@ function canvasUpdater() {
 	
 	// Logo
 	canvasCtx.drawImage(logoImg,center_x - (radiusMultiplier + curFrequency*.0018),center_y - (radiusMultiplier + curFrequency*.0018),radius + radiusMultiplier,radius + radiusMultiplier);
+}
+
+function handleVolumeChange(value) {
+    if (audio) {
+        audio.volume = value;
+        let icon = $("#volumeIcon");
+        if (value == 0) {
+            icon.attr('class', 'fas fa-volume-mute');
+        } else if (value < 0.5) {
+            icon.attr('class', 'fas fa-volume-down');
+        } else {
+            icon.attr('class', 'fas fa-volume-up');
+        }
+    }
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.id = 'welcome-toast';
+    toast.className = 'modern-toast';
+    toast.innerText = message;
+    document.body.appendChild(toast);
+    
+    // Trigger animation
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // Remove after 4 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            toast.remove();
+        }, 500); // wait for fade out
+    }, 4000);
 }

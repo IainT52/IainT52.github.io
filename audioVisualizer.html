@@ -17,31 +17,41 @@
 	<div class="canvas-wrap">
 		<canvas id="visualizer_render">
 		</canvas>
-		<!-- Audio Controls -->
 		<div class="navControl">
-			<div clas="navContainer">
-				<div class="form-group">
-					<label for="textbox"><a href="https://soundcloud.com/discover" target="_blank"><i class="fab fa-soundcloud soundcloud"></i></a></label>
-					<h2>Search tracks here:</h2>
+			<div class="navContainer">
+				<!-- Logo and Search -->
+				<form id="searchForm" class="searchWrapper" onsubmit="event.preventDefault(); handleSubmit_Button();">
+					<div class="wavyLogo">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-waveform"><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6 12v4"/><path d="M10 12v8"/><path d="M14 12v-6"/><path d="M18 12v-2"/><path d="M6 12v-2"/><path d="M10 12v-4"/><path d="M14 12v6"/><path d="M18 12v2"/></svg>
+					</div>
 					<input
 						id="user_URL"
-						type="textbox"
+						type="text"
 						class="form-control textbox"
 						name="URL"
-						value="https://soundcloud.com/mattmaeson/cringe"
+						placeholder="Search for songs or artists..."
 						onclick="textboxAuto_Highlight()"
 					/>
-				</div>
-				<div class="middleLine"></div>
-				<input  onmouseover="mouseOver = true" onmouseout="mouseOver = false" onclick="sliderTime()" type="range" id="audioSlider"/>
-				<div class="controlsContainer">
-					<button type="button" class="button" id="toggle" onclick="togglePlay()">
+					<button type="submit" class="searchBtn" id="submitButton">
+						<i class="fas fa-search"></i>
+					</button>
+				</form>
+				
+				<!-- Playback Controls -->
+				<div class="playbackControls">
+					<button type="button" class="playBtn" id="toggle" onclick="togglePlay()">
 						&#x23f5;
 					</button>
-					<button type="button" class="button" id="submitButton" onclick="handleSubmit_Button()">
-						Find Track
-					</button>
-					<h1 id="audioTimer"></h1>
+					<div class="sliderWrapper">
+						<input onmouseover="mouseOver = true" onmouseout="mouseOver = false" onclick="sliderTime()" type="range" id="audioSlider"/>
+					</div>
+					<span id="audioTimer">0:00</span>
+					
+					<!-- Volume Control -->
+					<div class="volumeWrapper">
+						<i class="fas fa-volume-down" id="volumeIcon"></i>
+						<input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.2" oninput="handleVolumeChange(this.value)"/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -59,7 +69,7 @@
     <!-- Search results -->
     <div class="resultsContainer">
         <ul>
-            <h3>No Search Results</h3>
+            <!-- Results will appear here -->
         </ul>
     </div>
 	<!-- Bootstrap modal notification (Popup tutorial on page load for how to use audio reaction) -->
@@ -73,27 +83,18 @@
 			  		</button>
 				</div>
 				<div class="modal-body">
-                <strong> Important Note: </strong>Unfortunately, the SoundCloud API is undergoing some changes and I no longer have access.
-                Until I can get approval for an API key, I have stored a base-64 encoded song locally so that you can still enjoy the audio visualizer :).
-                To use it, just select the 'Find Track' button below and then you can play and pause the music like normal.
-                <br><br>
-                Additionally, please ignore the song name,
-                album cover, search results, and any other features tied to the SoundCloud API. Sorry for the inconvenience.
-                  <!-- <strong>Finding a song: </strong>
-                    Use the search bar below to <b>1.</b> Enter a URL 
-                    <b>2.</b> Search for a song with a keyword search <b>3.</b> Use the pre-selected URL and hit "Find Track".
-                  <br><br>
-                  <strong>Play: </strong>
-				    Press the "Find Track" button to search and play songs.
+                    <strong>Welcome to the Audio Visualizer!</strong><br><br>
+                    We are now using the <strong>Audius API</strong> for music search. You can search for any track or artist in the search bar.
+                    <br><br>
+                    <strong>Finding a song:</strong><br>
+                    Use the search bar to search for a song with a keyword search and hit "Find Track".
+                    <br><br>
+                    <strong>Play:</strong><br>
+                    Select a song from the search results to play it.
                     You can pause and resume the music with the play/pause button.
-                  <br><br>
-				  <strong>Note: </strong>
-                    Any artists that require a SoundCloud Go+ subscription to listen to thier music
-                    do not allow their songs to be played through the API.  -->
 				</div>
 				<div class="modal-footer">
 			  		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			  		<button type="button" class="btn btn-primary"><a href="https://soundcloud.com/discover" target="_blank"><i class="fab fa-soundcloud soundcloud"></i></a></button>
 				</div>
 		  	</div>
 		</div>
