@@ -255,37 +255,37 @@ function canvasUpdater() {
 	// Elipse middle
 	canvasCtx.fillStyle = "white";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / (2 + (shapeRotation/3)*.01)), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000030), radius * (curFrequency * .00010), -( Math.PI / (2 + (shapeRotation/3)*.01)), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	//Elipse right 3
 	canvasCtx.fillStyle = "#ff0000";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x + 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x + 30, center_y - 20, radius * (curFrequency * .000030), radius * (curFrequency * .00010), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	//Elipse right 2
 	canvasCtx.fillStyle = "#00ff37";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x - 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x - 30, center_y - 20, radius * (curFrequency * .000030), radius * (curFrequency * .00010), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	//Elipse right 1
 	canvasCtx.fillStyle = "#ffea00";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000030), radius * (curFrequency * .00010), Math.PI / (4 + shapeRotation*.01), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	// Elipse left 3
 	canvasCtx.fillStyle = "#00ccff";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x - 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x - 30, center_y - 20, radius * (curFrequency * .000030), radius * (curFrequency * .00010), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	// Elipse left 2
 	canvasCtx.fillStyle = "#f700ff";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x + 30, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x + 30, center_y - 20, radius * (curFrequency * .000030), radius * (curFrequency * .00010), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
 	canvasCtx.fill();
 	// Elipse left 1
 	canvasCtx.fillStyle = "#0011ff";
 	canvasCtx.beginPath();
-	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000015), radius * (curFrequency * .00005), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
+	canvasCtx.ellipse(center_x, center_y - 20, radius * (curFrequency * .000030), radius * (curFrequency * .00010), -( Math.PI / (4 + shapeRotation*.01)), 0, 2 * Math.PI);
 	canvasCtx.fill();
 
 
