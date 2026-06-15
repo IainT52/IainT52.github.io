@@ -347,6 +347,12 @@ to appear properly specificty reasons */
     .card:not(:first-child) {
         margin-left: 1rem;
     }
+    .card:focus-within~.card, .card:hover~.card {
+        transform: none !important;
+    }
+    .card:hover {
+        transform: none !important;
+    }
     #filter {
         visibility: hidden;
     }

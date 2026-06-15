@@ -73,6 +73,10 @@ function refresh_canvasSize() {
 	canvas.height = window.innerHeight;
 }
 
+$(window).on('resize', function() {
+	refresh_canvasSize();
+});
+
 // Parses the input of the search box by checking for
 // a SoundCloud link or a keyword search. Handles errors
 // in the url format.

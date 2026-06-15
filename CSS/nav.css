@@ -1,0 +1,93 @@
+/* Navigation Styles */
+:root {
+    --main-theme-color: #1df0de;
+}
+
+.mobileNav_Container {
+    top: 20px;
+    right: 20px;
+    position: fixed;
+    z-index: 1001;
+    visibility: hidden;
+    outline: none !important;
+}
+
+.hamburgerStyle,
+.hamburgerStyle::before,
+.hamburgerStyle::after {
+    background-color: var(--main-theme-color) !important;
+}
+
+@media screen and (max-width: 768px) {
+    .mobileNav_Container {
+        visibility: visible;
+    }
+}
+
+/* Mobile Menu Overlay Styles */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(19, 19, 20, 0.96);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.mobile-nav-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 28px;
+    color: #818181;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mobile-nav-link i {
+    font-size: 24px;
+}
+
+.mobile-nav-link:hover, .mobile-nav-link:active {
+    color: var(--main-theme-color);
+    text-decoration: none;
+    transform: scale(1.1);
+}
+
+.mobile-socials {
+    display: flex;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.mobile-socials a {
+    color: #818181;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.mobile-socials a:hover {
+    color: var(--main-theme-color);
+}

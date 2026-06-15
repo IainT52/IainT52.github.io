@@ -395,25 +395,24 @@ input[type=range]::-webkit-slider-thumb {
 
 @media screen and (max-width: 550px) {
     .navControl {
-        left: 5vw;
+        width: 95%;
+        bottom: 15px;
     }
-	#audioTimer {
-		padding-left: 70px;
-	}
-	#audioSlider {
-		width: 300px;
+    .navContainer {
+        padding: 10px 15px;
+        gap: 10px;
     }
-	.controlsContainer {
-		justify-content: flex-start;
+    .playbackControls {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
     }
-    .textbox {
-        width: 300px !important;
+    .volumeWrapper {
+        margin-left: 0;
     }
-	.middleLine {
-		width: 300px;
-	}
-	.navControl h2 {
-		font-size: 20px;
+    #audioTimer {
+        min-width: unset;
+        text-align: left;
     }
 }
 

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="CSS/home.css">
         <!-- https://github.com/jonsuh/hamburgers -->
         <link rel="stylesheet" href="CSS/hamburgers.css">
+        <link rel="stylesheet" href="CSS/nav.css">
         <!-- Tab Icon -->
         <link rel="icon" type="image/ico" href="favicon.ico">
         <!-- Stylesheets/Icons -->
@@ -97,6 +98,20 @@
             </span>
         </button>
 <!-- </div> -->
+
+<!-- Mobile Nav Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu-content">
+                <a href="#" class="mobile-nav-link"><i class="lnr lnr-home"></i> HOME</a>
+                <a href="#aboutContainer" class="mobile-nav-link"><i class="lnr lnr-user"></i> ABOUT</a>
+                <a href="showcase.html" class="mobile-nav-link"><i class="lnr lnr-briefcase"></i> PROJECTS</a>
+                <a href="MISC/resume.pdf" class="mobile-nav-link" target="_blank"><i class="lnr lnr-license"></i> RESUME</a>
+                <div class="mobile-socials">
+                    <a href="https://www.linkedin.com/in/iain-tierney-3a23911b9/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/IainT52" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
 <!-- Far right side email and aesthetic line -->
         <div class="emailLine">
             <div class="topLine"></div>
@@ -149,10 +164,12 @@
                     projects with forward-thinking people. Feel free to reach out to me with the 
                     email I have floating around by the scroll bar -> :).
                 </p>
-                <iframe class ="ytVid" width="560" height="315"
-            src="https://www.youtube-nocookie.com/embed/bZ-BJHuTbS8"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
-            encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
+                <div class="video-container">
+                    <iframe class="ytVid"
+                        src="https://www.youtube-nocookie.com/embed/bZ-BJHuTbS8"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+                        encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
+                </div>
             </div>
         </div>
 <!-- Scrolling Animation scripts for paper plane (GSAP animation) -->
@@ -163,6 +180,7 @@
 <!-- Javascript plugin (typed.js) created by Matt Boldt www.mattboldt.com-->
         <script src="JS/typed.js"></script>
         <script src="JS/home.js" charset="utf-8"></script>
+        <script src="JS/nav.js" charset="utf-8"></script>
         <script type="text/javascript" src="JS/tagcloud.jquery.js"></script> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>   

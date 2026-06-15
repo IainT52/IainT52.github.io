@@ -6,7 +6,10 @@
     <title>Projects</title>
 
     <link rel="stylesheet" href="CSS/showcaseStyle.css">
+    <link rel="stylesheet" href="CSS/hamburgers.css">
+    <link rel="stylesheet" href="CSS/nav.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <script src="https://kit.fontawesome.com/1951006a4b.js" SameSite="None" crossorigin="anonymous"></script>
 </head>
   <body>
     <!-- Preloader Screen -->
@@ -20,6 +23,27 @@
     <!-- Logo-->
     <div class="logo">
       <a href="index.html"><img src="MISC/logo.png" style="width:150px; height:150px;"></img></a>
+    </div>
+    
+    <!-- SideNav Button for mobile -->
+    <button class="hamburger hamburger--spin mobileNav_Container" type="button">
+        <span class="hamburger-box">
+        <span class="hamburger-inner hamburgerStyle"></span>
+        </span>
+    </button>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-content">
+            <a href="index.html" class="mobile-nav-link"><i class="lnr lnr-home"></i> HOME</a>
+            <a href="index.html#aboutContainer" class="mobile-nav-link"><i class="lnr lnr-user"></i> ABOUT</a>
+            <a href="#" class="mobile-nav-link"><i class="lnr lnr-briefcase"></i> PROJECTS</a>
+            <a href="MISC/resume.pdf" class="mobile-nav-link" target="_blank"><i class="lnr lnr-license"></i> RESUME</a>
+            <div class="mobile-socials">
+                <a href="https://www.linkedin.com/in/iain-tierney-3a23911b9/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/IainT52" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
     </div>
     <!-- Background Globe -->
     <div id="backgroundAnimation"></div>
@@ -215,5 +239,6 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="JS/showcase.js"></script>
+    <script src="JS/nav.js"></script>
   </body>
 </html>
